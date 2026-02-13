@@ -5,11 +5,15 @@
   @override
   Widget build(BuildContext context) {
   return Scaffold(
-
-  resizeToAvoidBottomInset: true,
+//change
+    extendBodyBehindAppBar: true,
   appBar: AppBar(
+    backgroundColor: Colors.transparent,
+    elevation: 0,
+    scrolledUnderElevation: 0,
+    surfaceTintColor: Colors.transparent,
 
-
+//
   leading: IconButton(
   onPressed: () {
   Navigator.pop(context);
@@ -21,11 +25,12 @@
 
   ),
   ),
-  body: SingleChildScrollView(
-  child: Container(
-  padding: EdgeInsets.symmetric(horizontal: 70),
-  height: MediaQuery.of(context).size.height - 50,
-  width: double.infinity,
+ // body: SingleChildScrollView(
+  body: Container(
+ alignment:Alignment.center,
+  padding: EdgeInsets.all(32),
+    //height: MediaQuery.of(context).size.height-50,
+
     decoration: BoxDecoration(
       image: DecorationImage(
         image: AssetImage('assets/bg1.jpeg'),
@@ -122,7 +127,7 @@
   ),
 
 
-  ),
+
 
   ),
 
