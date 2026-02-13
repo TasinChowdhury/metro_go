@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:metrogo/SignUp.dart';
+
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
 
@@ -103,7 +105,36 @@ class _SigninScreenState extends State<SigninScreen> {
                               fontSize: 20,
                               color: Colors.white),))
                         ],
-                      )
+                      ),
+                      const SizedBox(height: 20),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Don't have an account? ",
+                            style: TextStyle(color: Colors.white,fontSize: 15),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignupPage(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Sign up',
+                              style: TextStyle(
+                                color: Colors.blue,fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
                     ],
                   )
                 ),
