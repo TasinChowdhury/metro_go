@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:metrogo/SignUp.dart';
+import 'package:metrogo/signup.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});

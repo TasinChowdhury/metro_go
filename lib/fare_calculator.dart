@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-class fare_calculator extends StatefulWidget {
+class FareCalculator extends StatefulWidget {
+  const FareCalculator({super.key});
+
   @override
-  State<fare_calculator> createState() => _fare_calculatorState();
+  State<FareCalculator> createState() => _FareCalculatorState();
 }
 
-class _fare_calculatorState extends State<fare_calculator> {
+class _FareCalculatorState extends State<FareCalculator> {
 
-  String? From;
-  String? To;
+  String? from;
+  String? to;
 
   List<String>place=[
     'Uttara North',
@@ -37,9 +39,9 @@ class _fare_calculatorState extends State<fare_calculator> {
           "Fare Calculator",
 
           style:TextStyle(
-          color:Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
+            color:Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
         ),
         elevation: 0,
@@ -61,134 +63,147 @@ class _fare_calculatorState extends State<fare_calculator> {
         ),
       ),
 
-        body: Padding(
-            padding:EdgeInsets.all(30),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
-                SizedBox(height: 20),
+      body: Padding(
+        padding:EdgeInsets.all(30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            SizedBox(height: 20),
 
-                  Text(
-                    "From",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-
-
-                    ),
-                  ),
-          DropdownButtonFormField<String>(
-                initialValue:From ,
+            Text(
+              "From",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
 
 
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.lightBlue,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-
-                  color:  Colors.lightBlue,
-                  width:2,
-
-                ),
               ),
             ),
-            hint: Text("Select station"),
-            isExpanded: true,
-            icon: Icon(Icons.arrow_drop_down),
-            style:TextStyle(
-              color: Colors.black,
-              fontSize: 18,
+            DropdownButtonFormField<String>(
+              initialValue:from ,
+
+
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.indigo,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(
+
+                    color:  Colors.indigo,
+                    width:2,
+
+                  ),
+                ),
+              ),
+              hint: const Text(
+                "Select station",
+                style: TextStyle(color: Colors.white),
+              ),
+
+              isExpanded: true,
+              icon: Icon(Icons.arrow_drop_down,
+                size: 20,
+                color: Colors.white,),
+              style:TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+
+
+              dropdownColor: Colors.white,
+              items:place.map((String loc){
+                return DropdownMenuItem<String>(
+                  value:loc,
+                  child:Text(loc),
+                );
+              }).toList(),
+              onChanged:(loc){
+                setState((){
+                  from=loc;
+                });
+              },
             ),
+            SizedBox(height: 20),
+            Text(
+              "TO",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
 
+              ),
+            ),
+            DropdownButtonFormField<String>(
+              initialValue:to,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.indigo,//ch
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(
 
-                  dropdownColor: Colors.white,
-                items:place.map((String loc){
-        return DropdownMenuItem<String>(
-        value:loc,
-        child:Text(loc),
-        );
-        }).toList(),
-        onChanged:(loc){
-          setState((){
-            From=loc;
-          });
-        },
-    ),
-                  SizedBox(height: 20),
-                  Text(
-                    "TO",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-
-                    ),
-                  ),
-                  DropdownButtonFormField<String>(
-                    initialValue:To,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.lightBlue,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-
-                            color:  Colors.lightBlue,
-                            width:2,
-
-                        ),
-                      ),
-                    ),
-                    hint: Text("Select station"),
-                    isExpanded: true,
-                    icon: Icon(Icons.arrow_drop_down),
-                    style:TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                    ),
-
-                    dropdownColor: Colors.white,
-                    items:place.map((String loc){
-                      return DropdownMenuItem<String>(
-                        value:loc,
-                        child:Text(loc),
-                      );
-                    }).toList(),
-                    onChanged:(loc){
-                      setState((){
-                        To=loc;
-                      });
-                    },
-                  ),
-                  SizedBox(height: 20),
-                  MaterialButton(
-                    minWidth: double.infinity,
-                    height: 60,
-                    onPressed: () {},
-                    color: Colors.lightBlue,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-
-                    ),
-                    child: Text(
-                      "Fare", style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.black,
-
-                    ),
-                    ),
+                    color:  Colors.indigo,//change
+                    width:2,
 
                   ),
-    ],
+                ),
+              ),
+              hint: const Text(
+                "Select station",
+                style: TextStyle(color: Colors.white),
+              ),
+              isExpanded: true,
+              icon: Icon(Icons.arrow_drop_down,
+                size: 20,
+                color: Colors.white,),
+              style:TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
 
-    ),
-    ),
+              dropdownColor: Colors.white,
+              items:place.map((String loc){
+                return DropdownMenuItem<String>(
+                  value:loc,
+                  child:Text(loc),
+                );
+              }).toList(),
+              onChanged:(loc){
+                setState((){
+                  to=loc;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            MaterialButton(
+              minWidth: double.infinity,
+              height: 60,
+              onPressed: () {},
+              color: Colors.indigo,//change
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+
+              ),
+              child: Text(
+                "Fare", style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Colors.white,
+
+              ),
+              ),
+
+            ),
+          ],
+
+        ),
+      ),
     );
 
 

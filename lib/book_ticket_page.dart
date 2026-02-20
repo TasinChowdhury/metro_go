@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'SignUp.dart';
+import 'signup.dart';
 
 class BookTicketPage extends StatefulWidget {
   const BookTicketPage({super.key});
