@@ -24,10 +24,7 @@ class _SignupPageState extends State< SignupPage> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-              onPressed: () => Navigator.pop(context),
-            ),
+
           ),
 
           body: Stack(
@@ -164,7 +161,7 @@ class _SignupPageState extends State< SignupPage> {
                             children: [
 
 
-                              const SizedBox(height: 20),
+
 
 
                               Row(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:metrogo/map.dart';
+//import 'package:metrogo/map.dart';
+import 'package:metrogo/home_page.dart';
 
 class TravelSchedule extends StatelessWidget {
   const TravelSchedule({super.key});
@@ -20,7 +21,11 @@ class TravelSchedule extends StatelessWidget {
         scrolledUnderElevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+                  (route) => false,
+            );
           },
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -113,37 +118,7 @@ class TravelSchedule extends StatelessWidget {
 
 
 
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-        child: SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.indigo,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 15),
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MapPage(),
-                ),
-              );
-            },
-            child: const Text(
-              "Map ->",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-          ),
-        ),
-      ),
+
     );
   }
 }
