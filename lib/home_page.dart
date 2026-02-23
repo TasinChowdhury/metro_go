@@ -3,6 +3,7 @@ import 'package:metrogo/fare_calculator.dart';
 import 'book_ticket_page.dart';
 
 
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key : key);
 
@@ -165,8 +166,16 @@ class _HomePageState extends State<HomePage> {
       mainAxisSpacing: 16,
       crossAxisSpacing: 16,
       children: [
-        _featureItem(Icons.calculate, "Fare\nCalculator", () {}),
-        _featureItem(Icons.confirmation_number, "Ticket\nBooking", () {}),
+        _featureItem(Icons.calculate, "Fare\nCalculator", () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => fare_calculator(),
+          ));
+        }),
+        _featureItem(Icons.confirmation_number, "Ticket\nBooking", () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => BookTicketPage(),
+          ));
+        }),
         _featureItem(Icons.credit_card, "Metro\nCard", () {}),
         _featureItem(Icons.alt_route, "Train\nRoute", () {}),
         _featureItem(Icons.history, "Ticket\nHistory", () {}),
@@ -176,14 +185,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget _featureItem(IconData icon, String title, VoidCallback onTap) {
     return GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => fare_calculator(),
-            ),
-          );
-    },
+      onTap: onTap,
+
      // onTap: () {}
         child: Container(
         decoration: BoxDecoration(

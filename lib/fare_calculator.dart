@@ -70,7 +70,7 @@ class _fare_calculatorState extends State<fare_calculator> {
                 SizedBox(height: 20),
 
                   Text(
-                    "From",
+                    "From:",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -85,7 +85,7 @@ class _fare_calculatorState extends State<fare_calculator> {
 
             decoration: InputDecoration(
               filled: true,
-              fillColor: Colors.lightBlue,
+              fillColor: Colors.indigo,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
@@ -96,7 +96,7 @@ class _fare_calculatorState extends State<fare_calculator> {
                 ),
               ),
             ),
-            hint: Text("Select station"),
+            hint: Text("Select station",style: TextStyle(color: Colors.white)),
             isExpanded: true,
             icon: Icon(Icons.arrow_drop_down),
             style:TextStyle(
@@ -120,7 +120,7 @@ class _fare_calculatorState extends State<fare_calculator> {
     ),
                   SizedBox(height: 20),
                   Text(
-                    "TO",
+                    "TO:",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -132,7 +132,7 @@ class _fare_calculatorState extends State<fare_calculator> {
                     initialValue:To,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.lightBlue,
+                      fillColor: Colors.indigo,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(
@@ -143,7 +143,7 @@ class _fare_calculatorState extends State<fare_calculator> {
                         ),
                       ),
                     ),
-                    hint: Text("Select station"),
+                    hint: Text("Select station",style: TextStyle(color: Colors.white) ),
                     isExpanded: true,
                     icon: Icon(Icons.arrow_drop_down),
                     style:TextStyle(
@@ -169,7 +169,7 @@ class _fare_calculatorState extends State<fare_calculator> {
                     minWidth: double.infinity,
                     height: 60,
                     onPressed: () {},
-                    color: Colors.lightBlue,
+                    color: Colors.indigoAccent,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),

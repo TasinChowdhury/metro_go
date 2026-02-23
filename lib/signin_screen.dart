@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:metrogo/SignUp.dart';
 
-import 'package:metrogo/signup.dart';
+import 'home_page.dart';
 
-class SigninScreen extends StatefulWidget {
+class SigninScreen extends StatelessWidget {
   const SigninScreen({super.key});
 
-  @override
-  State<SigninScreen> createState() => _SigninScreenState();
-}
-
-class _SigninScreenState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,27 +18,29 @@ class _SigninScreenState extends State<SigninScreen> {
             children: [
               Container(
                 padding: const EdgeInsets.only(left: 35, top: 330),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Welcome Back',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 33,
+                          fontWeight: FontWeight.bold,
+                  ),
+                                ),
+                    SizedBox(height: 8),
                     Text(
-                      'Welcome Back',
+                      'Sign in to your account',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 33,
-                        fontWeight: FontWeight.bold,
+                        color: Colors.white70,
+                        fontSize: 20,
+                  ),
+                                ),
+                              ],
+                            ),
                 ),
-              ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Sign in to your account',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 20,
-                ),
-              ),
-            ],
-          ),
         ),
               SingleChildScrollView(
                 child: Container(
@@ -77,7 +75,11 @@ class _SigninScreenState extends State<SigninScreen> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed:(){
-                            Navigator.pushNamed(context, 'signup');
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) =>HomePage(),
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.indigo,
@@ -95,8 +97,7 @@ class _SigninScreenState extends State<SigninScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10.0),
-                      SizedBox(height: 40,),
+                      SizedBox(height: 50,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -134,7 +135,6 @@ class _SigninScreenState extends State<SigninScreen> {
                           ),
                         ],
                       ),
-
                     ],
                   )
                 ),
