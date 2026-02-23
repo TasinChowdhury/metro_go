@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 class fare_calculator extends StatefulWidget {
   @override
   State<fare_calculator> createState() => _fare_calculatorState();
+
 }
 
 class _fare_calculatorState extends State<fare_calculator> {
 
-  String? From;
-  String? To;
+  String? from;
+  String? to;
 
   List<String>place=[
     'Uttara North',
@@ -80,25 +81,36 @@ class _fare_calculatorState extends State<fare_calculator> {
                     ),
                   ),
           DropdownButtonFormField<String>(
-                initialValue:From ,
+                initialValue:from ,
 
 
             decoration: InputDecoration(
               filled: true,
-              fillColor: Colors.lightBlue,
+              fillColor: Colors.indigo,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
 
-                  color:  Colors.lightBlue,
+
+                  color:  Colors.indigo,
                   width:2,
 
                 ),
               ),
+
             ),
-            hint: Text("Select station"),
+            hint: Text("Select station",
+               style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Colors.white,
+
+              ),
+            ),
             isExpanded: true,
-            icon: Icon(Icons.arrow_drop_down),
+            icon: Icon(Icons.arrow_drop_down,
+              size: 20,
+              color: Colors.white,),
             style:TextStyle(
               color: Colors.black,
               fontSize: 18,
@@ -114,7 +126,7 @@ class _fare_calculatorState extends State<fare_calculator> {
         }).toList(),
         onChanged:(loc){
           setState((){
-            From=loc;
+            from=loc;
           });
         },
     ),
@@ -129,23 +141,31 @@ class _fare_calculatorState extends State<fare_calculator> {
                     ),
                   ),
                   DropdownButtonFormField<String>(
-                    initialValue:To,
+                    initialValue:to,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.lightBlue,
+                      fillColor: Colors.indigo,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(
 
-                            color:  Colors.lightBlue,
+                            color:  Colors.indigo,
                             width:2,
 
                         ),
                       ),
+
                     ),
-                    hint: Text("Select station"),
+                    hint: Text("Select station",style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white,
+
+                    ),),
                     isExpanded: true,
-                    icon: Icon(Icons.arrow_drop_down),
+                    icon: Icon(Icons.arrow_drop_down,
+                      size: 20,
+                      color: Colors.white,),
                     style:TextStyle(
                       color: Colors.black,
                       fontSize: 18,
@@ -160,7 +180,7 @@ class _fare_calculatorState extends State<fare_calculator> {
                     }).toList(),
                     onChanged:(loc){
                       setState((){
-                        To=loc;
+                        to=loc;
                       });
                     },
                   ),
@@ -169,7 +189,7 @@ class _fare_calculatorState extends State<fare_calculator> {
                     minWidth: double.infinity,
                     height: 60,
                     onPressed: () {},
-                    color: Colors.lightBlue,
+                    color: Colors.indigo,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
@@ -179,7 +199,7 @@ class _fare_calculatorState extends State<fare_calculator> {
                       "Fare", style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: Colors.black,
+                      color: Colors.white,
 
                     ),
                     ),
