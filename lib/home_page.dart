@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
       children: [
         _featureItem(Icons.calculate, "Fare\nCalculator", () {
           Navigator.push(context, MaterialPageRoute(
-            builder: (context) => fare_calculator(),
+            builder: (context) => Fare_calculator(),
           ));
         }),
         _featureItem(Icons.confirmation_number, "Ticket\nBooking", () {

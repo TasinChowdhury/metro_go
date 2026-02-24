@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:metrogo/home_page.dart';
-class fare_calculator extends StatefulWidget {
+class Fare_calculator extends StatefulWidget {
+  const Fare_calculator ({super.key});
   @override
-  State<fare_calculator> createState() => _fare_calculatorState();
+  State<Fare_calculator> createState() => _Fare_calculatorState();
 
 }
 
-class _fare_calculatorState extends State<fare_calculator> {
+class _Fare_calculatorState extends State<Fare_calculator> {
 
   String? from;
   String? to;
