@@ -177,11 +177,11 @@ class _HomePageState extends State<HomePage> {
           ));
         }),
         _featureItem(Icons.credit_card, "Metro\nCard", () {}),
-     _featureItem(Icons.alt_route, "Train\nRoute", () {
-    Navigator.push(context, MaterialPageRoute(
-    builder: (context) => TravelSchedule(),
-    ));
-    }),
+        _featureItem(Icons.alt_route, "Train\nRoute", () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => TravelSchedule(),
+          ));
+        }),
         _featureItem(Icons.history, "Ticket\nHistory", () {}),
       ],
     );
@@ -191,31 +191,31 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: onTap,
 
-     // onTap: () {}
-        child: Container(
+      // onTap: () {}
+      child: Container(
         decoration: BoxDecoration(
-        color: Colors.white,
-    borderRadius: BorderRadius.circular(16),
-    boxShadow: [
-    BoxShadow(
-    color: Colors.indigo,
-    blurRadius: 6,
-    )
-    ],
-    ),
-    child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-    Icon(icon, size: 28, color: Colors.indigo),
-    const SizedBox(height: 8),
-    Text(
-    title,
-    textAlign: TextAlign.center,
-    style: const TextStyle(fontSize: 12),
-    ),
-    ],
-    ),
-    ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.indigo,
+              blurRadius: 6,
+            )
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 28, color: Colors.indigo),
+            const SizedBox(height: 8),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 12),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
