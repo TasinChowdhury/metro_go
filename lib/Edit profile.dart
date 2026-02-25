@@ -42,10 +42,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
           leading: IconButton(
             onPressed: () {
 
-             Navigator.pushAndRemoveUntil(
+             Navigator.push(
                context,
                 MaterialPageRoute(builder: (context) => ProfilePage ()),
-                    (route) => false,
+
               );
             },
             icon: Icon(Icons.arrow_back_ios,

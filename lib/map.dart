@@ -24,10 +24,10 @@ class MapPage extends StatelessWidget {
 
         leading: IconButton(
           onPressed: () {
-            Navigator.pushAndRemoveUntil(
+            Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => HomePage()),
-                  (route) => false,
+
             );
           },
           icon: Icon(Icons.arrow_back_ios,

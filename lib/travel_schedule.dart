@@ -21,10 +21,10 @@ class TravelSchedule extends StatelessWidget {
 
         leading: IconButton(
           onPressed: () {
-            Navigator.pushAndRemoveUntil(
+            Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => HomePage()),
-                  (route) => false,
+
             );
           },
           icon: const Icon(

@@ -40,10 +40,10 @@ class MyApp extends StatelessWidget {
      // initialRoute: 'SignUp'
     //  initialRoute: 'home_page',
      // initialRoute: 'signin_screen',
-    // initialRoute: 'SignUp',
+     //initialRoute: 'SignUp',
      //initialRoute: 'edit',
 
-     initialRoute: 'fare_calculator',
+     //initialRoute: 'fare_calculator',
 
       //initialRoute: 'book_ticket_page',
      //initialRoute: 'travel',
@@ -53,17 +53,17 @@ class MyApp extends StatelessWidget {
 
         //'signin_screen': (context) => SigninScreen(),
        // 'SignUp': (context) =>  SignupPage(),
-      'travel': (context) =>  TravelSchedule(),
+      //'travel': (context) =>  TravelSchedule(),
 
         //'home_page': (context) => HomePage(),
        // 'fare_calculator': (context) => Fare_calculator(),
        // 'book_ticket_page': (context) => BookTicketPage(),
 
        // 'signin_screen': (context) => SigninScreen(),
-       // 'SignUp': (context) => SignupPage(),
+        'SignUp': (context) => SignupPage(),
        // 'edit': (context) =>  EditProfilePage(),
       //  'home_page': (context) => HomePage(),
-        'fare_calculator': (context) => Fare_calculator(),
+       // 'fare_calculator': (context) => Fare_calculator(),
         //'book_ticket_page': (context) => BookTicketPage(),
 
 
