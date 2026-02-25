@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:metrogo/payment_input_page.dart';
-import 'book_ticket_page.dart';
+import 'card.dart';
 
-class PaymentPage extends StatefulWidget {
-  const PaymentPage({super.key});
+class RechargePage extends StatefulWidget {
+  const RechargePage({super.key});
 
   @override
-  State<PaymentPage> createState() => _PaymentPageState();
+  State<RechargePage> createState() => _RechargePageState();
 }
 
-class _PaymentPageState extends State<PaymentPage> {
+class _RechargePageState extends State<RechargePage> {
   int selectedIndex = -1;
 
   @override
@@ -19,13 +18,15 @@ class _PaymentPageState extends State<PaymentPage> {
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         elevation: 0,
-        title: Text("BOOKING TICKET"),
+        title: Text("Recharge Card",  style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,
+          fontSize: 22,),),
         centerTitle: true,
         leading: IconButton(
+          color: Colors.white,
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => BookTicketPage()),
+              MaterialPageRoute(builder: (context) => CardHomePage()),
             );
           },
         ),
@@ -49,7 +50,7 @@ class _PaymentPageState extends State<PaymentPage> {
                     'Amount to Pay',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 21,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -73,7 +74,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   color: Colors.indigo,
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: selectedIndex == 0 ? Colors.blue : Colors.white,
+                    color: selectedIndex == 0 ? Colors.black45 : Colors.white,
                     width: 12, // make it thicker
                   ),
                 ),
@@ -111,7 +112,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   color: Colors.indigo,
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: selectedIndex == 1 ? Colors.blue : Colors.white,
+                    color: selectedIndex == 1 ? Colors.black45 : Colors.white,
                     width: 12, // make it thicker
                   ),
                 ),
@@ -132,7 +133,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       style: TextStyle(
                         fontSize: 23,
                         fontWeight: FontWeight.w600,
-                        color: selectedIndex == 1 ? Colors.black : Colors.white,
+                        color: selectedIndex == 1 ? Colors.black45 : Colors.white,
                       ),
                     ),
                   ],
@@ -149,7 +150,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   color: Colors.indigo,
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: selectedIndex == 2 ? Colors.blue : Colors.white,
+                    color: selectedIndex == 2 ? Colors.black45 : Colors.white,
                     width: 12, // make it thicker
                   ),
                 ),
@@ -198,7 +199,7 @@ class _PaymentPageState extends State<PaymentPage> {
                         topRight: Radius.circular(30),
                       ),
                     ),
-                    builder: (context) => PaymentInputPage(),
+                    builder: (context) => CardHomePage(),
                   );
                 },
                 child: Row(

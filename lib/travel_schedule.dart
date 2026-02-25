@@ -9,6 +9,7 @@ class TravelSchedule extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo,
+
         title: const Text(
           "Travel Schedule",
           style: TextStyle(
@@ -17,6 +18,7 @@ class TravelSchedule extends StatelessWidget {
             fontSize: 20,
           ),
         ),
+        centerTitle: true,
         elevation: 0,
 
         leading: IconButton(

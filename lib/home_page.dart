@@ -1,46 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:metrogo/map.dart';
+import 'package:metrogo/profile_page.dart';
 import 'package:metrogo/fare_calculator.dart';
-import 'book_ticket_page.dart';
 import 'package:metrogo/travel_schedule.dart';
 
+import 'ticket_history.dart';
+import 'card.dart';
+import 'book_ticket_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key : key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
+  PageController controller = PageController();
+
+  final List<Widget> _pages = [
+    HomePage(),
+    MapPage(),
+    TicketHistory(),
+    CardHomePage(),
+    ProfilePage(),
+  ];
+
   @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     debugShowCheckedModeBanner: false,
+  //     // Wrap the whole app in a Container for a full-screen background
+  //     home: Container(
+  //       decoration: const BoxDecoration(
+  //         gradient: LinearGradient(
+  //           // Define the starting and ending points for the gradient
+  //           begin: Alignment.topLeft,
+  //           end: Alignment.bottomRight,
+  //           // Define the colors for the gradient
+  //           colors: <Color>[
+  //             Color(0xffe5e9f6), // Start color
+  //             Color(0xfffdfdfd), // End color
+  //           ],
+  //         ),
+  //       ),
+  //
+  //       child: Scaffold(
+  //         backgroundColor: Colors.transparent,
+  //         bottomNavigationBar: _bottomNavBar(),
+  //         body: SafeArea(
+  //           child: _pages[_currentIndex],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF4F7F6),
-      bottomNavigationBar: _bottomNavBar(),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-
-              _header(),
-              const SizedBox(height: 16),
-
-              _currentStationCard(),
-              const SizedBox(height: 16),
-
-              _nextTrainsCard(),
-              const SizedBox(height: 24),
-
-              _featuresGrid(context),
-              const SizedBox(height: 24),
-
-              _recentJourney(),
-            ],
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+        // Wrap the whole app in a Container for a full-screen background
+        home: Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  // Define the starting and ending points for the gradient
+                  begin: Alignment.topLeft, end: Alignment.bottomRight,
+                    // Define the colors for the gradient
+                    colors: <Color>[ Color(0xffe5e9f6), // Start color
+                                     Color(0xfffdfdfd), // End color
+                    ],
+                ),
+            ),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            bottomNavigationBar: _bottomNavBar(),
+            body:
+            SafeArea(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _header(), const SizedBox(height: 16),
+                    _currentStationCard(), const SizedBox(height: 16),
+                    _nextTrainsCard(), const SizedBox(height: 24),
+                    _featuresGrid(context), const SizedBox(height: 24),
+                    _recentJourney(),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
-      ),
     );
   }
 
@@ -51,34 +102,37 @@ class _HomePageState extends State<HomePage> {
         Row(
           children: [
             const CircleAvatar(
+              backgroundColor: Color(0xfff4fbff),
               radius: 24,
-              backgroundImage: AssetImage('assets/profile.png'), // optional
+              backgroundImage: AssetImage('assets/profile.png'),
             ),
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                Text("Hey,",
-                    style: TextStyle(fontSize: 14, color: Colors.grey)),
+                Text(
+                  "Hey,",
+                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                ),
                 Text(
                   "Kaniz Fatema",
-                  style: TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
-            )
+            ),
           ],
         ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.notifications_none),
-        )
+        // IconButton(
+        //   onPressed: () {},
+        //   icon: const Icon(Icons.notifications_none),
+        // ),
       ],
     );
   }
 
   Widget _currentStationCard() {
     return Card(
+      color: Color(0xffd7deff),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -92,19 +146,27 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Current Station",
-                        style: TextStyle(color: Colors.grey)),
-                    Text("Uttara North",
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text(
+                      "Current Station",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      "Uttara North",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                //Navigator.push(context, route)
+              },
               child: const Text("Change"),
-            )
+            ),
           ],
         ),
       ),
@@ -113,6 +175,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _nextTrainsCard() {
     return Card(
+      color: Color(0xffd7deff),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
 
       child: Padding(
@@ -129,8 +192,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
                 Text("Uttara North → Motijheel"),
-                Text("09:55 am",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                Text("09:55 am", style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
             const SizedBox(height: 12),
@@ -140,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(width: 8),
                 _timeChip("10:15 am"),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -167,22 +229,35 @@ class _HomePageState extends State<HomePage> {
       crossAxisSpacing: 16,
       children: [
         _featureItem(Icons.calculate, "Fare\nCalculator", () {
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) => Fare_calculator(),
-          ));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Fare_calculator()),
+          );
         }),
         _featureItem(Icons.confirmation_number, "Ticket\nBooking", () {
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) => BookTicketPage(),
-          ));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BookTicketPage()),
+          );
         }),
-        _featureItem(Icons.credit_card, "Metro\nCard", () {}),
-        _featureItem(Icons.alt_route, "Train\nRoute", () {
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) => TravelSchedule(),
-          ));
+        _featureItem(Icons.credit_card, "Metro\nCard", () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CardHomePage()),
+          );
         }),
-        _featureItem(Icons.history, "Ticket\nHistory", () {}),
+        _featureItem(Icons.schedule_outlined, "Travel\nSchedule", () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TravelSchedule()),
+          );
+        }),
+        _featureItem(Icons.history, "Ticket\nHistory", () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TicketHistory()),
+          );
+        }),
       ],
     );
   }
@@ -196,12 +271,7 @@ class _HomePageState extends State<HomePage> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.indigo,
-              blurRadius: 6,
-            )
-          ],
+          boxShadow: [BoxShadow(color: Colors.indigo, blurRadius: 6)],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -229,8 +299,10 @@ class _HomePageState extends State<HomePage> {
         ),
         const SizedBox(height: 12),
         Card(
+          color: Color(0xffd7deff),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16)),
+            borderRadius: BorderRadius.circular(16),
+          ),
           child: ListTile(
             leading: const Icon(Icons.train, color: Colors.indigo),
             title: const Text("Uttara North → Motijheel"),
@@ -242,15 +314,36 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _bottomNavBar() {
+Widget _bottomNavBar() {
     return BottomNavigationBar(
+      backgroundColor: Color(0xffd7deff),
       selectedItemColor: Colors.indigo,
-      unselectedItemColor: Colors.grey,
+      unselectedItemColor: Color(0xff202020),
       type: BottomNavigationBarType.fixed,
+
+      currentIndex: _currentIndex,
+      //currentPage: _pages,
+
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+        //controller.jumpToPage(index);
+      },
+        // child: Row(
+        //   children: [
+        //     Expanded(
+        //         child: IconButton(onPressed: () {nextPage(_HomePageState())},
+        //             icon: Icon(Icons.home)) )
+        //   ],
+        // ),
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.alt_route), label: "Routes"),
-        BottomNavigationBarItem(icon: Icon(Icons.confirmation_number), label: "Tickets"),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.confirmation_number),
+          label: "Tickets",
+        ),
         BottomNavigationBarItem(icon: Icon(Icons.credit_card), label: "Card"),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
       ],

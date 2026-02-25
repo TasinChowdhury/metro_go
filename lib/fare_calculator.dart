@@ -46,6 +46,7 @@ class _Fare_calculatorState extends State<Fare_calculator> {
             fontSize: 20,
           ),
         ),
+        centerTitle: true,
         elevation: 0,
 
 
