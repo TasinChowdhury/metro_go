@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:metrogo/payment_input_page.dart';
+import 'package:metrogo/recharge_input.dart';
 import 'card.dart';
 
 class RechargePage extends StatefulWidget {
@@ -74,7 +76,7 @@ class _RechargePageState extends State<RechargePage> {
                   color: Colors.indigo,
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: selectedIndex == 0 ? Colors.black45 : Colors.white,
+                    color: selectedIndex == 0 ? Colors.black : Colors.white,
                     width: 12, // make it thicker
                   ),
                 ),
@@ -112,7 +114,7 @@ class _RechargePageState extends State<RechargePage> {
                   color: Colors.indigo,
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: selectedIndex == 1 ? Colors.black45 : Colors.white,
+                    color: selectedIndex == 1 ? Colors.black : Colors.white,
                     width: 12, // make it thicker
                   ),
                 ),
@@ -133,7 +135,7 @@ class _RechargePageState extends State<RechargePage> {
                       style: TextStyle(
                         fontSize: 23,
                         fontWeight: FontWeight.w600,
-                        color: selectedIndex == 1 ? Colors.black45 : Colors.white,
+                        color: selectedIndex == 1 ? Colors.black : Colors.white,
                       ),
                     ),
                   ],
@@ -150,7 +152,7 @@ class _RechargePageState extends State<RechargePage> {
                   color: Colors.indigo,
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: selectedIndex == 2 ? Colors.black45 : Colors.white,
+                    color: selectedIndex == 2 ? Colors.black : Colors.white,
                     width: 12, // make it thicker
                   ),
                 ),
@@ -184,7 +186,7 @@ class _RechargePageState extends State<RechargePage> {
               height: 52,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.indigoAccent,
+                  backgroundColor: Colors.indigo,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
@@ -199,7 +201,7 @@ class _RechargePageState extends State<RechargePage> {
                         topRight: Radius.circular(30),
                       ),
                     ),
-                    builder: (context) => CardHomePage(),
+                    builder: (context) => RechargeInput(),
                   );
                 },
                 child: Row(

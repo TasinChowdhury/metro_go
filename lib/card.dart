@@ -8,7 +8,38 @@ class CardHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: const Color(0xfff3f6f6),
+      appBar: AppBar(
+        backgroundColor: Colors.indigo,
+        title:Text(
+
+          "Metro Card",
+
+          style:TextStyle(
+            color:Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+            letterSpacing: 1.5,
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0,
+
+        leading: IconButton(
+          onPressed: () {
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+
+            );
+          },
+          icon: Icon(Icons.arrow_back_ios,
+            size: 20,
+            color: Colors.white,),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -80,27 +111,6 @@ class CardHomePage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _bottomNavBar() {
-    return BottomNavigationBar(
-      backgroundColor: Color(0xffd7deff),
-      selectedItemColor: Colors.indigo,
-      unselectedItemColor: Color(0xff202020),
-      elevation: 0,
-      type: BottomNavigationBarType.fixed,
-      items: [
-        BottomNavigationBarItem(
-            icon: const Icon(Icons.home), label: "Home",),
-        const BottomNavigationBarItem(icon: Icon(Icons.alt_route), label: "Routes"),
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.confirmation_number),
-          label: "Tickets",
-        ),
-        const BottomNavigationBarItem(icon: Icon(Icons.credit_card), label: "Card"),
-        const BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-      ],
     );
   }
 }

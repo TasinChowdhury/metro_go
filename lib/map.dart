@@ -17,8 +17,10 @@ class MapPage extends StatelessWidget {
             color:Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 20,
+            letterSpacing: 1.5,
           ),
         ),
+        centerTitle: true,
         elevation: 0,
 
 
@@ -44,9 +46,9 @@ class MapPage extends StatelessWidget {
 
               alignment: Alignment.center,
 
-              width: 900,
+              width: 750,
 
-              height: 600,
+              height: 700,
               padding: EdgeInsets.all(32),
               decoration: BoxDecoration(
                 image: DecorationImage(

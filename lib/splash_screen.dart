@@ -9,14 +9,15 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-
   late AnimationController _controller;
   late Animation<double> _moveAnimation;
   late Animation<double> _scaleAnimation;
+  late Animation<double> _metroOpacity;
+  late Animation<double> _textOpacity;
+  late Animation<double> _textSlide;
 
- // bool showText = false;
+  bool showText = false;
   bool showMetro = true;
-  bool showLogo = false;
 
   @override
   void initState() {
@@ -29,16 +30,13 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    // Show app name
+    //Show app name
     Future.delayed(const Duration(seconds: 3), () {
-      setState(() {
-        showMetro = false;
-        showLogo = true;
-      });
+      setState(() => showText = true);
     });
 
     // Navigate next screen
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 4), () {
       Navigator.pushReplacementNamed(context, 'signin_screen');
     });
   }
@@ -51,89 +49,155 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.indigo,
       body: LayoutBuilder(
         builder: (context, constraints) {
-
           final screenWidth = constraints.maxWidth;
           final screenHeight = constraints.maxHeight;
 
           // 🚇 Move from left to center
-          _moveAnimation = Tween<double>(
-            begin: -300,
-            end: screenWidth / 2 - 75,
-          ).animate(
+          _moveAnimation = Tween<double>(begin: -220, end: screenWidth / 2 - 80)
+              .animate(
+                CurvedAnimation(
+                  parent: _controller,
+                  curve: const Interval(0.0, 0.35, curve: Curves.easeInOut),
+                ),
+              );
+
+          // 🔄 Scale down (transform)
+          _scaleAnimation = Tween<double>(begin: 1.0, end: 0.6).animate(
             CurvedAnimation(
               parent: _controller,
-              //curve: Curves.easeOut,
-              curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
+              curve: const Interval(0.4, 0.6, curve: Curves.easeOut),
             ),
           );
 
-          //🔄 Scale down (transform)
-          _scaleAnimation = Tween<double>(
-            begin: 1.0,
-            end: 0.4,
-          ).animate(
+          // 🚇 Metro fade out
+          _metroOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
             CurvedAnimation(
               parent: _controller,
-              curve: const Interval(0.5, 0.75, curve: Curves.easeIn),
+              curve: const Interval(0.6, 0.8, curve: Curves.easeOut),
             ),
           );
+
+          // 🟢 Text fade in
+          _textOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(
+              parent: _controller,
+              curve: const Interval(0.6, 1.0, curve: Curves.easeIn),
+            ),
+          );
+
+          // 🟢 Text slight slide up
+          _textSlide = Tween<double>(begin: 20, end: 0).animate(
+            CurvedAnimation(
+              parent: _controller,
+              curve: const Interval(0.6, 1.0, curve: Curves.easeOut),
+            ),
+          );
+
+          // _fadeAppName = Tween<double>(
+          //   begin: 0.0,
+          //   end: 1.0,
+          // ).animate(CurvedAnimation(
+          //   parent: _controller,
+          //   curve: const Interval(.6, 1.0,curve: Curves.easeIn),
+          // ),
+          // );
 
           return Stack(
             alignment: Alignment.center,
             children: [
               // 🚇 Metro animation
-             AnimatedOpacity(
-               opacity: showMetro ? 1:0,
-               duration: const Duration(seconds: 1),
-               child: AnimatedBuilder(
-                 animation: _controller,
-                 builder: (context, child) {
-                   return Positioned(
-                     top: screenHeight / 2 , // ✅ vertical center
-                     left: _moveAnimation.value,
-                     child: Transform.scale(
-                       scale: _scaleAnimation.value,
-                       child: Image.asset(
-                         'assets/splash.png',
-                         width: 400,
-                       ),
-                     ),
-                   );
-                 },
-               ),
-             ),
+              AnimatedBuilder(
+                animation: _controller,
+                builder: (context, child) {
+                  return Positioned(
+                    top: screenHeight / 2 - 100, // ✅ vertical center
+                    left: _moveAnimation.value,
+                    child: Opacity(
+                      opacity: _metroOpacity.value,
+                      child: Transform.scale(
+                        scale: _scaleAnimation.value,
+                        child: ClipOval(
+                          child: Image.asset(
+                            'assets/splash.png',
+                            width: 160,
+                            height: 160,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
 
+              // 🟢 App name
+              //      FadeTransition(
+              //        opacity: _fadeAppName,
+              //            child: Image.asset(
+              //              'assets/icon.png',
+              //              width: 400,
+              //              height: 400,
+              //              fit: BoxFit.cover,
+              //            ),
+              //      ),
 
-             // 🟢 App name
-          AnimatedOpacity(
-            opacity: showLogo ? 1 : 0,
-            duration: const Duration(seconds: 1),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  'assets/app_icon.png',
-                  width: 100,
-                  //alignment: Alignment.center,
-                ),
-                const SizedBox(height: 100),
-                Image.asset(
-                  'assets/app_name.png',
-                  width: 350,
-                ),
-              ],
-            ),
-          ),
-          ],
+              // );
+              // Positioned(
+              //   top: screenHeight / 2 - 120,
+              //   child: AnimatedOpacity(
+              //     opacity: showText ? 1 : 0,
+              //     duration: const Duration(milliseconds: 800),
+              //     child: const Text(
+              //       'MetroGo',
+              //       style: TextStyle(
+              //         fontSize: 32,
+              //         fontWeight: FontWeight.bold,
+              //         letterSpacing: 1.5,
+              //         color: Colors.white,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
+              AnimatedBuilder(
+                animation: _controller,
+                builder: (context, child) {
+                  return Positioned(
+                    top: screenHeight / 2 - 10 + _textSlide.value,
+                    child: Opacity(
+                      opacity: _textOpacity.value,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+
+                          const Text(
+                            'MetroG',
+                            style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.5,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Image.asset(
+                            'assets/app_icon.png',
+                            width: 32,
+                          ),
+                          const SizedBox(width: 10),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           );
         },
       ),
     );
   }
 }
-

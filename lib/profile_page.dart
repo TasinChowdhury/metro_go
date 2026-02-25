@@ -13,10 +13,12 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         elevation: 0,
-        title: const Text("ACCOUNT"),
+        title: const Text(
+          "ACCOUNT",
+          style: TextStyle(color: Colors.white),),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
+          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white,),
           onPressed: () {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) =>HomePage()),
