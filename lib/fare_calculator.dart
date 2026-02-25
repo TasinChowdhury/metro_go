@@ -47,9 +47,9 @@ class _Fare_calculatorState extends State<Fare_calculator> {
           ),
         ),
         elevation: 0,
-        scrolledUnderElevation: 0,
 
-        surfaceTintColor:  Colors.transparent,
+
+
 
 
 //
@@ -193,25 +193,26 @@ class _Fare_calculatorState extends State<Fare_calculator> {
               },
             ),
             SizedBox(height: 20),
-            MaterialButton(
-              minWidth: double.infinity,
-              height: 60,
-              onPressed: () {},
-              color: Colors.indigo,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
+            ElevatedButton(
+              onPressed: () {
 
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 60),
+                backgroundColor: Colors.indigo,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
               ),
               child: Text(
-                "Fare", style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Colors.white,
-
+                "Fare",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
               ),
-              ),
-
             ),
           ],
 

@@ -18,7 +18,7 @@ class TravelSchedule extends StatelessWidget {
           ),
         ),
         elevation: 0,
-        scrolledUnderElevation: 0,
+
         leading: IconButton(
           onPressed: () {
             Navigator.pushAndRemoveUntil(
@@ -110,7 +110,7 @@ class TravelSchedule extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 100),
+            //const SizedBox(height: 100),
           ],
         ),
       ),

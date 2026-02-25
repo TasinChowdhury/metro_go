@@ -33,9 +33,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
           ),
           elevation: 0,
-          scrolledUnderElevation: 0,
 
-          surfaceTintColor:  Colors.transparent,
+
+
 
 
 //

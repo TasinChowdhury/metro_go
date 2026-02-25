@@ -20,7 +20,7 @@ class MapPage extends StatelessWidget {
           ),
         ),
         elevation: 0,
-        scrolledUnderElevation: 0,
+
 
         leading: IconButton(
           onPressed: () {
