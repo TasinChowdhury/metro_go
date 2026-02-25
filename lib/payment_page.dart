@@ -19,7 +19,7 @@ class _PaymentPageState extends State<PaymentPage> {
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         elevation: 0,
-        title: Text("BOOKING TICKET"),
+        title: const Text("BOOKING TICKET"),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),

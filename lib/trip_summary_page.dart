@@ -11,7 +11,7 @@ class TripSummaryPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         elevation: 0,
-        title: Text("BOOKING TICKET"),
+        title: const Text("BOOKING TICKET"),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
@@ -39,50 +39,63 @@ class TripSummaryPage extends StatelessWidget {
                   Text(
                     'Trip Summary:',
                     style: TextStyle(
-                      fontSize: 21,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
                       decoration: TextDecoration.underline,
                     ),
                   ),
                   SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Trip Type:',
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        'One Way',
+                        style: TextStyle(
+                          color: Colors.grey.shade700,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 4),
                   Text(
-                    'Trip Type',
+                    'Route:',
                     style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 21,
+                      color: Colors.grey.shade700,
+                      fontSize: 24,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    'Route',
+                    'Passengers:',
                     style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 21,
+                      color: Colors.grey.shade700,
+                      fontSize: 24,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    'Passengers',
+                    'Payment Methode:',
                     style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 21,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Payment Methode',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 21,
+                      color: Colors.grey.shade700,
+                      fontSize: 24,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(height: 4),
 
-                  Divider(color: Colors.grey.shade400),
+                  Divider(color: Colors.grey.shade600),
                   SizedBox(height: 16),
 
                   Row(
@@ -112,8 +125,8 @@ class TripSummaryPage extends StatelessWidget {
                           Text(
                             'Total Price',
                             style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 21,
+                              color: Colors.grey.shade700,
+                              fontSize: 25,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -141,7 +154,7 @@ class TripSummaryPage extends StatelessWidget {
                     'QR Code',
                     style: TextStyle(
                       color: Colors.grey,
-                      fontSize: 13,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

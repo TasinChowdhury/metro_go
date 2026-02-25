@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'home_page.dart';
 import 'payment_page.dart';
 
@@ -74,7 +73,7 @@ class _BookTicketPageState extends State<BookTicketPage> {
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(builder: (context) => HomePage() ),
             );
           },
         ),
