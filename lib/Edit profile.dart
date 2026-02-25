@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:metrogo/profile_page.dart';
 
 
 class EditProfilePage extends StatefulWidget {
@@ -41,11 +42,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
           leading: IconButton(
             onPressed: () {
 
-           //   Navigator.pushAndRemoveUntil(
-              //  context,
-               // MaterialPageRoute(builder: (context) => HomePage()),
-                   // (route) => false,
-            //  );
+             Navigator.pushAndRemoveUntil(
+               context,
+                MaterialPageRoute(builder: (context) => ProfilePage ()),
+                    (route) => false,
+              );
             },
             icon: Icon(Icons.arrow_back_ios,
               size: 20,

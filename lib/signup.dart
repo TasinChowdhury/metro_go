@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'signin_screen.dart';
+import 'package:metrogo/home_page.dart';
 
 class  SignupPage extends StatefulWidget {
   const  SignupPage({super.key});
@@ -134,6 +135,11 @@ class _SignupPageState extends State< SignupPage> {
                             height: 50,
                             child: ElevatedButton(
                               onPressed: () {
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>  HomePage ()),
+                                      (route) => false,
+                                );
 
                               },
                               style: ElevatedButton.styleFrom(

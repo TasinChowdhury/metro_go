@@ -37,6 +37,7 @@ class _Fare_calculatorState extends State<Fare_calculator> {
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         title:Text(
+
           "Fare Calculator",
 
           style:TextStyle(
