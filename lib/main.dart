@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:metrogo/home_screen.dart';
-import 'package:metrogo/signin_screen.dart';
-import 'package:metrogo/signup.dart';
-import 'package:metrogo/fare_calculator.dart';
-import 'package:metrogo/travel_schedule.dart';
-import 'package:metrogo/signin_screen.dart';
-import 'package:metrogo/fare_calculation.dart';
 
 
-import 'home_page.dart';
-import 'splash_screen.dart';
-import 'book_ticket_page.dart';
-import 'package:metrogo/signup.dart';
-import 'home_page.dart';
-import 'splash_screen.dart';
-import 'book_ticket_page.dart';
+
+
+//import 'package:metrogo/signin_screen.dart';
+
+
+
+
+
+//import 'package:metrogo/signup.dart';
+//import 'home_page.dart';
+//import 'splash_screen.dart';
+//import 'book_ticket_page.dart';
 import "Edit profile.dart";
 
 

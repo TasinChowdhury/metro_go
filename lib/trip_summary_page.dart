@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metrogo/payment_page.dart';
-
+import 'trip_data.dart';
 class TripSummaryPage extends StatelessWidget {
   const TripSummaryPage({super.key});
 
@@ -23,7 +23,7 @@ class TripSummaryPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+        padding: EdgeInsets.symmetric(horizontal: 0, vertical: 24),
         child: Column(
           children: [
             Container(
@@ -59,14 +59,17 @@ class TripSummaryPage extends StatelessWidget {
                       Text(
                         'One Way',
                         style: TextStyle(
-                          color: Colors.grey.shade700,
+                          color: Colors.grey.shade600,
                           fontSize: 24,
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(height: 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Text(
                     'Route:',
                     style: TextStyle(
@@ -75,7 +78,20 @@ class TripSummaryPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  Text(
+                    '${TripData.selectedFrom}->${TripData.selectedTo}',
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+              ],
+            ),
                   SizedBox(height: 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Text(
                     'Passengers:',
                     style: TextStyle(
@@ -84,7 +100,20 @@ class TripSummaryPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  Text(
+                    '${TripData.passengerCount} Passengers',
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  ],
+              ),
                   SizedBox(height: 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Text(
                     'Payment Methode:',
                     style: TextStyle(
@@ -93,16 +122,40 @@ class TripSummaryPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  Text(
+                    TripData.paymentMethod(),
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  ],
+              ),
                   SizedBox(height: 4),
 
                   Divider(color: Colors.grey.shade600),
                   SizedBox(height: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Total Price',
+                    style: TextStyle(
+                      color: Colors.grey.shade700,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height:0,),
+              ],
+            ),
 
                   Row(
                     children: [
                       Container(
-                        height: 45,
-                        width: 45,
+                        height: 38,
+                        width: 40,
                         decoration: BoxDecoration(
                           color: Colors.indigo,
                           borderRadius: BorderRadius.circular(10),
@@ -111,31 +164,26 @@ class TripSummaryPage extends StatelessWidget {
                           child: Text(
                             '৳',
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 25,
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(width: 14),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                      SizedBox(width: 2),
                           Text(
-                            'Total Price',
+                            '${TripData.price}',
                             style: TextStyle(
+                              fontSize: 39,
                               color: Colors.grey.shade700,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(height: 16),
                         ],
                       ),
                     ],
-                  ),
-                ],
+
+
               ),
             ),
 

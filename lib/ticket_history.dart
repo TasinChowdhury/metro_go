@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart'
-;
+import 'home_page.dart';
 class TicketHistory extends StatefulWidget {
   const TicketHistory({super.key});
 

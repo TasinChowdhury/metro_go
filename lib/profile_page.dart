@@ -28,18 +28,13 @@ class ProfilePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 20),
-
-
-          const CircleAvatar(
+           SizedBox(height: 20),
+           CircleAvatar(
             radius: 55,
             foregroundImage: AssetImage('assets/profile2.png'),
           ),
-
-          const SizedBox(height: 16),
-
-
-          const Text(
+           SizedBox(height: 16),
+           Text(
             'Kaniz Fatema',
             style: TextStyle(
               fontSize: 20,
@@ -48,10 +43,8 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 4),
-
-
-          const Text(
+          SizedBox(height: 4),
+          Text(
             'kanizFatema@gmail.com',
             style: TextStyle(
               fontSize: 14,
@@ -59,10 +52,7 @@ class ProfilePage extends StatelessWidget {
               fontWeight: FontWeight.bold
             ),
           ),
-
-          const SizedBox(height: 20),
-
-
+           SizedBox(height: 20),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 40),
             width: double.infinity,
@@ -93,14 +83,14 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 30),
+          SizedBox(height: 30),
 
 
           GestureDetector(
             onTap: () {},
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              padding:  EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(14),
@@ -114,19 +104,13 @@ class ProfilePage extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.shade200,
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
                     ),
-                    child: const Icon(Icons.info_outline,
-                        color: Color(0xFF3F51B5), size: 20),
+                    child:Icon(Icons.info_outline,
+                        color: Color(0xFF3F51B5)
+                        , size: 20),
                   ),
-                  const SizedBox(width: 14),
-                  const Expanded(
+                   SizedBox(width: 14),
+                   Expanded(
                     child: Text(
                       'Information',
                       style: TextStyle(
@@ -164,13 +148,7 @@ class ProfilePage extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.shade200,
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
+
                     ),
                     child: const Icon(Icons.logout,
                         color: Colors.red, size: 20),

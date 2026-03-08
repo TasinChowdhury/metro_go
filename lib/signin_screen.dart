@@ -3,8 +3,34 @@ import 'package:metrogo/SignUp.dart';
 
 import 'home_page.dart';
 
-class SigninScreen extends StatelessWidget {
+class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
+
+  @override
+  State<SigninScreen> createState() => _SigninScreenState();
+}
+
+class _SigninScreenState extends State<SigninScreen> {
+
+  final _formKey = GlobalKey<FormState>();
+  String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter email';
+    }
+    else if (!value.contains('@') || !value.contains('.')) {
+      return 'Please enter a valid email';
+    }
+    return null;
+  }
+  String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter password';
+    }
+    if (value.length < 6) {
+      return 'Password must be at least 6 characters';
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +69,9 @@ class SigninScreen extends StatelessWidget {
               ),
             ),
             SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                autovalidateMode: AutovalidateMode.disabled,
               child: Container(
                 padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.5,
@@ -51,7 +80,7 @@ class SigninScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    TextField(
+                    TextFormField(
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -59,10 +88,16 @@ class SigninScreen extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
+                        errorStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.red,
+                        ),
                       ),
+                      validator: (value) => validateEmail(value),
                     ),
                     SizedBox(height: 30),
-                    TextField(
+                    TextFormField(
                       obscureText: true,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
@@ -71,7 +106,13 @@ class SigninScreen extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
+                        errorStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.red,
+                        ),
                       ),
+                      validator: (value) => validatePassword(value),
                     ),
                     SizedBox(height: 30),
                     SizedBox(
@@ -79,9 +120,12 @@ class SigninScreen extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                          );
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                            );
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.indigo,
@@ -148,6 +192,7 @@ class SigninScreen extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
             ),
           ],
         ),
