@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metrogo/payment_input_page.dart';
 import 'book_ticket_page.dart';
-import 'trip_data.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -54,20 +53,11 @@ class _PaymentPageState extends State<PaymentPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 3),
-                  Text(
-                    '৳${TripData.price}',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
+                  SizedBox(height: 10),
                 ],
               ),
             ),
             SizedBox(height: 24),
-
 
             Text(
               'Select Payment Method',
@@ -76,7 +66,7 @@ class _PaymentPageState extends State<PaymentPage> {
             SizedBox(height: 2),
 
             GestureDetector(
-              onTap: () => setState(() { selectedIndex = 0;  TripData.paymentIndex = 0;}),
+              onDoubleTap: () => setState(() => selectedIndex = 0),
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 decoration: BoxDecoration(
@@ -84,7 +74,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
                     color: selectedIndex == 0 ? Colors.blue : Colors.white,
-                    width: 12,
+                    width: 12, // make it thicker
                   ),
                 ),
                 child: Row(
@@ -114,7 +104,7 @@ class _PaymentPageState extends State<PaymentPage> {
             SizedBox(height: 2),
 
             GestureDetector(
-              onTap: () => setState(() { selectedIndex = 1;  TripData.paymentIndex = 1;}),
+              onTap: () => setState(() => selectedIndex = 1),
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 decoration: BoxDecoration(
@@ -122,7 +112,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
                     color: selectedIndex == 1 ? Colors.blue : Colors.white,
-                    width: 12,
+                    width: 12, // make it thicker
                   ),
                 ),
                 child: Row(
@@ -152,7 +142,7 @@ class _PaymentPageState extends State<PaymentPage> {
             SizedBox(height: 2),
 
             GestureDetector(
-              onTap: () => setState(() { selectedIndex = 2;  TripData.paymentIndex = 2;}),
+              onTap: () => setState(() => selectedIndex = 2),
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 decoration: BoxDecoration(
@@ -160,7 +150,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
                     color: selectedIndex == 2 ? Colors.blue : Colors.white,
-                    width: 12,
+                    width: 12, // make it thicker
                   ),
                 ),
                 child: Row(
@@ -199,33 +189,17 @@ class _PaymentPageState extends State<PaymentPage> {
                   ),
                 ),
                 onPressed: () {
-                  if (selectedIndex == -1) {
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Center(
-                          child: Text('Please select a payment method first!', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)
-                          ),
-                        ),
-
-                        backgroundColor: Colors.redAccent,
-                        duration: Duration(seconds: 2),
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
                       ),
-                    );
-                  } else {
-
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        ),
-                      ),
-                      builder: (context) => PaymentInputPage(),
-                    );
-                  }
+                    ),
+                    builder: (context) => PaymentInputPage(),
+                  );
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

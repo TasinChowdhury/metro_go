@@ -12,12 +12,11 @@ class CardHomePage extends StatelessWidget {
       backgroundColor: const Color(0xfff3f6f6),
       appBar: AppBar(
         backgroundColor: Colors.indigo,
-        title:Text(
-
+        title: Text(
           "Metro Card",
 
-          style:TextStyle(
-            color:Colors.white,
+          style: TextStyle(
+            color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 22,
             letterSpacing: 1.5,
@@ -28,16 +27,12 @@ class CardHomePage extends StatelessWidget {
 
         leading: IconButton(
           onPressed: () {
-
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => HomePage()),
-
             );
           },
-          icon: Icon(Icons.arrow_back_ios,
-            size: 20,
-            color: Colors.white,),
+          icon: Icon(Icons.arrow_back_ios, size: 20, color: Colors.white),
         ),
       ),
       body: SafeArea(
@@ -96,9 +91,7 @@ class CardHomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const RechargePage(),
-                      ),
+                      MaterialPageRoute(builder: (_) => const RechargePage()),
                     );
                   },
                   child: const Text(

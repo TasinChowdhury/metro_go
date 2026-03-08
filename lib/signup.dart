@@ -10,45 +10,6 @@ class  SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State< SignupPage> {
-  final _formKey = GlobalKey<FormState>();
-  String? validateEmail(String? email) {
-    RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$');
-
-    if (email == null || email.isEmpty) {
-      return "Enter your email";
-    } else if (!emailRegex.hasMatch(email)) {
-      return "Enter a valid email";
-    }
-    return null;
-  }
-
-  String? validatePassword(String? password) {
-    if (password == null || password.isEmpty) {
-      return "Enter your password";
-    } else if (password.length < 6) {
-      return "Password must be at least 6 characters";
-    }
-    return null;
-  }
-  String? validateConfirmPassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Confirm your password";
-    } else if (value != passwordController.text) {
-      return "Password does not match";
-    }
-    return null;
-  }
-  String? validateUsername(String? username) {
-    if (username == null || username.isEmpty) {
-      return "Enter your username";
-    } else if (username.length < 3) {
-      return "Username must be at least 3 characters";
-    }
-    return null;
-  }
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -107,14 +68,11 @@ class _SignupPageState extends State< SignupPage> {
                       bottom: 40,
 
                     ),
-                    child:
-                     Form(
-                    key: _formKey,
-                    child:Column(
+                    child: Column(
                         children: [
 
 
-                          TextFormField(
+                          TextField(
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -123,14 +81,12 @@ class _SignupPageState extends State< SignupPage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            validator: validateUsername,
                           ),
 
                           const SizedBox(height: 20),
 
 
-                          TextFormField(
-                            controller: emailController,
+                          TextField(
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -139,12 +95,12 @@ class _SignupPageState extends State< SignupPage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            validator: validateEmail,
                           ),
+
                           const SizedBox(height: 20),
 
 
-                          TextFormField(
+                          TextField(
                             obscureText: true,
                             decoration: InputDecoration(
                               filled: true,
@@ -154,14 +110,12 @@ class _SignupPageState extends State< SignupPage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            validator: validateConfirmPassword,
-
                           ),
 
                           const SizedBox(height: 20),
 
 
-                          TextFormField(
+                          TextField(
                             obscureText: true,
                             decoration: InputDecoration(
                               filled: true,
@@ -171,7 +125,6 @@ class _SignupPageState extends State< SignupPage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            validator: validateConfirmPassword,
                           ),
 
                           const SizedBox(height: 30),
@@ -182,14 +135,11 @@ class _SignupPageState extends State< SignupPage> {
                             height: 50,
                             child: ElevatedButton(
                               onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage()),
-
-                                  );
-                                }
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>  HomePage ()),
+                                      (route) => false,
+                                );
 
                               },
                               style: ElevatedButton.styleFrom(
@@ -231,15 +181,12 @@ class _SignupPageState extends State< SignupPage> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (
-                                                context) => const SigninScreen(),
-                                          ),
-                                        );
-
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => const SigninScreen(),
+                                        ),
+                                      );
                                     },
                                     child: const Text(
                                       "Sign In",
@@ -259,7 +206,6 @@ class _SignupPageState extends State< SignupPage> {
                           ),
                         ]
                     ),
-                     ),
                   ),
                 ),
               ]
