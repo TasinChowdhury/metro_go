@@ -46,13 +46,13 @@ class MapPage extends StatelessWidget {
 
               alignment: Alignment.center,
 
-              width: 750,
+              width: 600,
 
               height: 700,
               padding: EdgeInsets.all(32),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/tmap.jpeg',),
+                  image: AssetImage('assets/t1map.jpeg',),
                   fit: BoxFit.cover,
                 ),
               ),

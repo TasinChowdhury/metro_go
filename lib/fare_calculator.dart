@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metrogo/fare_calculation.dart';
 import 'package:metrogo/home_page.dart';
 class Fare_calculator extends StatefulWidget {
   const Fare_calculator ({super.key});
@@ -10,8 +11,7 @@ class Fare_calculator extends StatefulWidget {
 class _Fare_calculatorState extends State<Fare_calculator> {
 
   String? from;
-  String? to;
-
+  String? to;int ?price;
   List<String>place=[
     'Uttara North',
     'Uttara Center',
@@ -29,6 +29,17 @@ class _Fare_calculatorState extends State<Fare_calculator> {
     'Secretariat',
     'Motijheel',
   ];
+  void calculatePrice(){
+    if(from==null||to==null)
+      return;
+    int f=place.indexOf(from!);
+    int t=place.indexOf(to!);
+    int distance=(f-t).abs();
+     price=distance*20;
+   /// print(price);
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +141,7 @@ class _Fare_calculatorState extends State<Fare_calculator> {
               items:place.map((String loc){
                 return DropdownMenuItem<String>(
                   value:loc,
-                  child:Text(loc),
+                  child:Text(loc,),
                 );
               }).toList(),
               onChanged:(loc){
@@ -195,9 +206,24 @@ class _Fare_calculatorState extends State<Fare_calculator> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
 
-              },
+                onPressed: () {
+
+                  calculatePrice();
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Calculation(
+                          from: from!,
+                          to: to!,
+                          price: price!
+
+                      ),
+                    ),
+                  );
+
+                },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 60),
                 backgroundColor: Colors.indigo,
@@ -206,14 +232,16 @@ class _Fare_calculatorState extends State<Fare_calculator> {
                   borderRadius: BorderRadius.circular(50),
                 ),
               ),
+
               child: Text(
-                "Fare",
+                "Fare: Tk.",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                   color: Colors.white,
                 ),
               ),
+
             ),
           ],
 
