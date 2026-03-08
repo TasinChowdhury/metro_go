@@ -10,14 +10,14 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _moveAnimation;
-  late Animation<double> _scaleAnimation;
-  late Animation<double> _metroOpacity;
+  // late Animation<double> _moveAnimation;
+  // late Animation<double> _scaleAnimation;
+  // late Animation<double> _metroOpacity;
   late Animation<double> _textOpacity;
   late Animation<double> _textSlide;
 
-  bool showText = false;
-  bool showMetro = true;
+  bool showText = true;
+  //bool showMetro = true;
 
   @override
   void initState() {
@@ -25,18 +25,18 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 4),
+      duration: const Duration(seconds: 3),
     );
 
     _controller.forward();
 
     //Show app name
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(milliseconds: 2500), () {
       setState(() => showText = true);
     });
 
     // Navigate next screen
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(context, 'signin_screen');
     });
   }
@@ -57,35 +57,35 @@ class _SplashScreenState extends State<SplashScreen>
           final screenHeight = constraints.maxHeight;
 
           // 🚇 Move from left to center
-          _moveAnimation = Tween<double>(begin: -220, end: screenWidth / 2 - 80)
-              .animate(
-                CurvedAnimation(
-                  parent: _controller,
-                  curve: const Interval(0.0, 0.35, curve: Curves.easeInOut),
-                ),
-              );
-
-          // 🔄 Scale down (transform)
-          _scaleAnimation = Tween<double>(begin: 1.0, end: 0.6).animate(
-            CurvedAnimation(
-              parent: _controller,
-              curve: const Interval(0.4, 0.6, curve: Curves.easeOut),
-            ),
-          );
-
-          // 🚇 Metro fade out
-          _metroOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
-            CurvedAnimation(
-              parent: _controller,
-              curve: const Interval(0.6, 0.8, curve: Curves.easeOut),
-            ),
-          );
+          // _moveAnimation = Tween<double>(begin: -220, end: screenWidth / 2 - 80)
+          //     .animate(
+          //       CurvedAnimation(
+          //         parent: _controller,
+          //         curve: const Interval(0.0, 0.35, curve: Curves.easeInOut),
+          //       ),
+          //     );
+          //
+          // // 🔄 Scale down (transform)
+          // _scaleAnimation = Tween<double>(begin: 1.0, end: 0.6).animate(
+          //   CurvedAnimation(
+          //     parent: _controller,
+          //     curve: const Interval(0.35, 0.6, curve: Curves.easeOut),
+          //   ),
+          // );
+          //
+          // // 🚇 Metro fade out
+          // _metroOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
+          //   CurvedAnimation(
+          //     parent: _controller,
+          //     curve: const Interval(0.55, 0.65, curve: Curves.easeOut),
+          //   ),
+          // );
 
           // 🟢 Text fade in
           _textOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
             CurvedAnimation(
               parent: _controller,
-              curve: const Interval(0.6, 1.0, curve: Curves.easeIn),
+              curve: const Interval(0.48, 1.0, curve: Curves.easeIn),
             ),
           );
 
@@ -93,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen>
           _textSlide = Tween<double>(begin: 20, end: 0).animate(
             CurvedAnimation(
               parent: _controller,
-              curve: const Interval(0.6, 1.0, curve: Curves.easeOut),
+              curve: const Interval(0.48, 1.0, curve: Curves.easeOut),
             ),
           );
 
@@ -110,29 +110,29 @@ class _SplashScreenState extends State<SplashScreen>
             alignment: Alignment.center,
             children: [
               // 🚇 Metro animation
-              AnimatedBuilder(
-                animation: _controller,
-                builder: (context, child) {
-                  return Positioned(
-                    top: screenHeight / 2 - 100, // ✅ vertical center
-                    left: _moveAnimation.value,
-                    child: Opacity(
-                      opacity: _metroOpacity.value,
-                      child: Transform.scale(
-                        scale: _scaleAnimation.value,
-                        child: ClipOval(
-                          child: Image.asset(
-                            'assets/splash.png',
-                            width: 160,
-                            height: 160,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
+              // AnimatedBuilder(
+              //   animation: _controller,
+              //   builder: (context, child) {
+              //     return Positioned(
+              //       top: screenHeight / 2 - 100, // ✅ vertical center
+              //       left: _moveAnimation.value,
+              //       child: Opacity(
+              //         opacity: _metroOpacity.value,
+              //         child: Transform.scale(
+              //           scale: _scaleAnimation.value,
+              //           child: ClipOval(
+              //             child: Image.asset(
+              //               'assets/splash.png',
+              //               width: 160,
+              //               height: 160,
+              //               fit: BoxFit.cover,
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     );
+              //   },
+              // ),
 
               // 🟢 App name
               //      FadeTransition(
@@ -162,7 +162,6 @@ class _SplashScreenState extends State<SplashScreen>
               //     ),
               //   ),
               // ),
-
               AnimatedBuilder(
                 animation: _controller,
                 builder: (context, child) {
@@ -173,7 +172,6 @@ class _SplashScreenState extends State<SplashScreen>
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-
                           const Text(
                             'MetroG',
                             style: TextStyle(
@@ -183,10 +181,7 @@ class _SplashScreenState extends State<SplashScreen>
                               color: Colors.white,
                             ),
                           ),
-                          Image.asset(
-                            'assets/app_icon.png',
-                            width: 32,
-                          ),
+                          Image.asset('assets/app_icon.png', width: 32),
                           const SizedBox(width: 10),
                         ],
                       ),

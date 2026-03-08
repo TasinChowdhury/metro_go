@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "841226058427",
+    "project_id": "flutter-2a477",
+    "storage_bucket": "flutter-2a477.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841226058427:android:254b69cfeab9767d5fc79e",
+        "android_client_info": {
+          "package_name": "com.example.metrogo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXcKxPEVu8owOfUqdhwDg0X1m8NT1B3x8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

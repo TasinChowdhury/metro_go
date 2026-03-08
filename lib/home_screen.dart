@@ -6,45 +6,17 @@ import 'fare_calculator.dart';
 import 'ticket_history.dart';
 import 'travel_schedule.dart';
 
-
 class Homescreen extends StatelessWidget {
   const Homescreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // return SafeArea(
-    //   child: SingleChildScrollView(
-    //     padding: const EdgeInsets.all(16),
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       children: [
-    //         _header(),
-    //         const SizedBox(height: 16),
-    //
-    //         _currentStationCard(),
-    //         const SizedBox(height: 16),
-    //
-    //         _nextTrainsCard(),
-    //         const SizedBox(height: 24),
-    //
-    //         _featuresGrid(context),
-    //         const SizedBox(height: 24),
-    //
-    //         _recentJourney(),
-    //       ],
-    //     ),
-    //   ),
-    // );
-
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Color(0xffe5e9f6),
-            Color(0xfffdfdfd),
-          ],
+          colors: [Color(0xffe5e9f6), Color(0xfffdfdfd)],
         ),
       ),
       child: SafeArea(
@@ -54,13 +26,13 @@ class Homescreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _header(),
-              const SizedBox(height: 16),
-              _currentStationCard(),
-              const SizedBox(height: 16),
-              _nextTrainsCard(),
-              const SizedBox(height: 24),
+             // const SizedBox(height: 18),
+             // _currentStationCard(),
+             // const SizedBox(height: 16),
+             // _nextTrainsCard(),
+              const SizedBox(height: 30),
               _featuresGrid(context),
-              const SizedBox(height: 24),
+              const SizedBox(height: 40),
               _recentJourney(),
             ],
           ),
@@ -196,7 +168,7 @@ class Homescreen extends StatelessWidget {
 
   Widget _featuresGrid(BuildContext context) {
     return GridView.count(
-      crossAxisCount: 3,
+      crossAxisCount: 2,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       mainAxisSpacing: 16,
@@ -255,7 +227,7 @@ class Homescreen extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),
