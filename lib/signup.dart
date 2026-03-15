@@ -10,7 +10,7 @@ class  SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State< SignupPage> {
-  final _formKey = GlobalKey<FormState>();
+    final _formKey = GlobalKey<FormState>();
   String? validateEmail(String? email) {
     RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$');
 
