@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:metrogo/profile_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class EditProfilePage extends StatefulWidget {
@@ -51,7 +53,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return null;
   }
   bool obscurePassword = true;
+  Future edit() async{
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email:emailController.text.trim(),
+        password: passwordController.text.trim(),
 
+    );
+    addDetails(
+        nameController.text.trim(),
+        locationController.text.trim(),
+        emailController.text.trim(),
+        passwordController.text.trim()
+    );
+  }
+  Future addDetails(String email,String passward,String name,String location) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'email':email,
+      'password': passward,
+      'name':name,
+      'location':location
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

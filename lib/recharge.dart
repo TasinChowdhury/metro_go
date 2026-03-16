@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:metrogo/payment_input_page.dart';
 import 'package:metrogo/recharge_input.dart';
 import 'card.dart';
 
@@ -20,8 +19,14 @@ class _RechargePageState extends State<RechargePage> {
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         elevation: 0,
-        title: Text("Recharge Card",  style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,
-          fontSize: 22,),),
+        title: Text(
+          "Recharge Card",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
+        ),
         centerTitle: true,
         leading: IconButton(
           color: Colors.white,

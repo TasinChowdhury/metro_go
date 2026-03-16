@@ -1,6 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'signin_screen.dart';
 import 'package:metrogo/home_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class  SignupPage extends StatefulWidget {
   const  SignupPage({super.key});
@@ -10,7 +15,8 @@ class  SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State< SignupPage> {
-    final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+
   String? validateEmail(String? email) {
     RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$');
 
@@ -30,6 +36,7 @@ class _SignupPageState extends State< SignupPage> {
     }
     return null;
   }
+
   String? validateConfirmPassword(String? value) {
     if (value == null || value.isEmpty) {
       return "Confirm your password";
@@ -38,6 +45,7 @@ class _SignupPageState extends State< SignupPage> {
     }
     return null;
   }
+
   String? validateUsername(String? username) {
     if (username == null || username.isEmpty) {
       return "Enter your username";
@@ -46,9 +54,36 @@ class _SignupPageState extends State< SignupPage> {
     }
     return null;
   }
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
+ Future SignupPage() async{
+   await FirebaseAuth.instance.createUserWithEmailAndPassword(
+       email:emailController.text.trim(),
+   password: passwordController.text.trim()
+   );
+   addDetails(
+
+       emailController.text.trim(),
+       passwordController.text.trim()
+     );
+ }
+  Future addDetails(String email,String passward) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'email':email,
+      'password': passward
+    });
+  }
+
+  @override
+  void dispose(){
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -101,137 +136,135 @@ class _SignupPageState extends State< SignupPage> {
                 SingleChildScrollView(
                   child: Container(
                     padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.30,
+                      top: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.30,
                       left: 30,
                       right: 30,
                       bottom: 40,
 
                     ),
                     child:
-                     Form(
-                    key: _formKey,
-                    child:Column(
-                        children: [
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                          children: [
 
 
-                          TextFormField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Username',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            validator: validateUsername,
-                          ),
-
-                          const SizedBox(height: 20),
-
-
-                          TextFormField(
-                            controller: emailController,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Email',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            validator: validateEmail,
-                          ),
-                          const SizedBox(height: 20),
-
-
-                          TextFormField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Password',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            validator: validateConfirmPassword,
-
-                          ),
-
-                          const SizedBox(height: 20),
-
-
-                          TextFormField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Confirm Password',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            validator: validateConfirmPassword,
-                          ),
-
-                          const SizedBox(height: 30),
-
-
-                          SizedBox(
-                            width: double.infinity,
-                            height: 50,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage()),
-
-                                  );
-                                }
-
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.indigo,
-                                shape: RoundedRectangleBorder(
+                            TextFormField(
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Username',
+                                border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: const Text(
-                                'Sign Up',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                              validator: validateUsername,
+                            ),
+
+                            const SizedBox(height: 20),
+
+
+                            TextFormField(
+                              controller: emailController,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Email',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              validator: validateEmail,
+                            ),
+                            const SizedBox(height: 20),
+
+
+                            TextFormField(
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Password',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              validator: validatePassword,
+
+                            ),
+
+                            const SizedBox(height: 20),
+
+
+                            TextFormField(
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Confirm Password',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              validator: validateConfirmPassword,
+                            ),
+
+                            const SizedBox(height: 30),
+
+
+                            SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+
+                                    );
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.indigo,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: const Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
 
-                          const SizedBox(height: 40),
-
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            const SizedBox(height: 40),
 
 
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
 
 
-
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    "Already have account? ",
-                                    style: TextStyle(color: Colors.white,
-                                      fontSize:16,
-                                      fontWeight:FontWeight.bold,),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      "Already have account? ",
+                                      style: TextStyle(color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -239,27 +272,26 @@ class _SignupPageState extends State< SignupPage> {
                                                 context) => const SigninScreen(),
                                           ),
                                         );
-
-                                    },
-                                    child: const Text(
-                                      "Sign In",
-                                      style: TextStyle(
-                                        color: Colors.blue,
-                                        fontSize:16,
-                                        fontWeight: FontWeight.bold,
+                                      },
+                                      child: const Text(
+                                        "Sign In",
+                                        style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
+                                  ],
+                                ),
 
 
-                              const SizedBox(height: 30),
-                            ],
-                          ),
-                        ]
+                                const SizedBox(height: 30),
+                              ],
+                            ),
+                          ]
+                      ),
                     ),
-                     ),
                   ),
                 ),
               ]
@@ -267,5 +299,5 @@ class _SignupPageState extends State< SignupPage> {
         )
     );
   }
-}
 
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'payment_page.dart';
+import 'trip_data.dart';
 
 class BookTicketPage extends StatefulWidget {
   const BookTicketPage({super.key});
@@ -58,6 +59,38 @@ class _BookTicketPageState extends State<BookTicketPage> {
     } else {
       return '$passengerCount Passengers';
     }
+  }
+  String? validateSelections() {
+    if (selectedFrom == null) {
+      return 'Please select departure city';
+    }
+    if (selectedTo == null) {
+      return 'Please select destination city';
+    }
+    if (selectedFrom == selectedTo) {
+      return 'Departure and destination cannot be same';
+    }
+    if (selectedDay == null) {
+      return 'Please select a day';
+    }
+    if (selectedTime == null) {
+      return 'Please select a time';
+    }
+    if (passengerCount == 0) {
+      return 'Please add at least 1 passenger';
+    }
+    return null;
+  }
+  int price = 0;
+
+  void calculatePrice() {
+    if (selectedFrom == null || selectedTo == null) {
+      return;
+    }
+    int f = cities.indexOf(selectedFrom!);
+    int t = cities.indexOf(selectedTo!);
+    int distance = (f - t).abs();
+    price = distance * 20 * passengerCount;
   }
 
   @override
@@ -134,6 +167,7 @@ class _BookTicketPageState extends State<BookTicketPage> {
                         onChanged: (String? newValue) {
                           setState(() {
                             selectedFrom = newValue;
+                            calculatePrice();
                           });
                         },
                         items: cities.map((String city) {
@@ -169,6 +203,7 @@ class _BookTicketPageState extends State<BookTicketPage> {
                         onChanged: (String? newValue) {
                           setState(() {
                             selectedTo = newValue;
+                            calculatePrice();
                           });
                         },
                         items: cities.map((String city) {
@@ -274,6 +309,7 @@ class _BookTicketPageState extends State<BookTicketPage> {
                                 onPressed: () {
                                   setState(() {
                                     if (passengerCount > 0) passengerCount--;
+                                    calculatePrice();
                                   });
                                 },
                               ),
@@ -294,6 +330,7 @@ class _BookTicketPageState extends State<BookTicketPage> {
                                 onPressed: () {
                                   setState(() {
                                     if (passengerCount < 20) passengerCount++;
+                                    calculatePrice();
                                   });
                                 },
                               ),
@@ -320,6 +357,21 @@ class _BookTicketPageState extends State<BookTicketPage> {
                         ),
                       ),
                       onPressed: () {
+                        String? error = validateSelections();
+                        if (error != null) {
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(error),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                          return;
+                        }
+                        TripData.selectedFrom = selectedFrom ?? '';
+                        TripData.selectedTo = selectedTo ?? '';
+                        TripData.passengerCount = passengerCount;
+                        TripData.price = price;
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (context) => PaymentPage(),
