@@ -266,7 +266,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const ProfilePage()),
+                            MaterialPageRoute(builder: (context) =>  ProfilePage()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
@@ -289,7 +289,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           if (_formKey.currentState!.validate())
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const ProfilePage()),
+                              MaterialPageRoute(builder: (context) =>  ProfilePage()),
                             );
                           },
 

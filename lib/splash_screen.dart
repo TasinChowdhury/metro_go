@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,10 +19,24 @@ class _SplashScreenState extends State<SplashScreen>
 
   bool showText = true;
   //bool showMetro = true;
+  Future<void> _navigate() async {
+    await Future.delayed(const Duration(seconds: 12));
+
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (!mounted) return;
+
+    if (user != null) {
+      Navigator.of(context).pushReplacementNamed('home_page');
+    } else {
+      Navigator.of(context).pushReplacementNamed('signin_screen');
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    _navigate();
 
     _controller = AnimationController(
       vsync: this,
@@ -53,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen>
       backgroundColor: Colors.indigo,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final screenWidth = constraints.maxWidth;
+          //final screenWidth = constraints.maxWidth;
           final screenHeight = constraints.maxHeight;
 
           // 🚇 Move from left to center

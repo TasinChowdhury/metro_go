@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'Edit profile.dart';
 import 'home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+   ProfilePage({super.key});
+  final user =FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,7 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 16),
 
 
-          const Text(
+          Text(
             'Kaniz Fatema',
             style: TextStyle(
               fontSize: 20,
@@ -51,8 +55,8 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 4),
 
 
-          const Text(
-            'kanizFatema@gmail.com',
+           Text(user.email!
+            ,
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey,
@@ -147,7 +151,11 @@ class ProfilePage extends StatelessWidget {
 
 
           GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              final navigator = Navigator.of(context);
+              await FirebaseAuth.instance.signOut();
+              navigator.pushReplacementNamed('signin_screen');
+            },
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),

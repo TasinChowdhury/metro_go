@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metrogo/payment_page.dart';
+import 'home_page.dart';
 import 'trip_data.dart';
 class TripSummaryPage extends StatelessWidget {
   const TripSummaryPage({super.key});
@@ -17,7 +17,7 @@ class TripSummaryPage extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => PaymentPage()),
+              MaterialPageRoute(builder: (context) => HomePage()),
             );
           },
         ),
