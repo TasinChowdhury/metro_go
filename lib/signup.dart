@@ -58,29 +58,36 @@ class _SignupPageState extends State< SignupPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
- Future SignupPage() async{
-   await FirebaseAuth.instance.createUserWithEmailAndPassword(
-       email:emailController.text.trim(),
-   password: passwordController.text.trim()
-   );
-   addDetails(
+  final TextEditingController  usernameController = TextEditingController();
 
-       emailController.text.trim(),
-       passwordController.text.trim()
-     );
- }
-  Future addDetails(String email,String passward) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'email':email,
-      'password': passward
-    });
-  }
+        Future signupUser(String username, String email, String password) async {
+          final userCredential = await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+
+          final uid = userCredential.user!.uid;
+
+          await FirebaseFirestore.instance.collection('users').doc(uid).set({
+            'username': username,
+            'email': email,
+            'location': '',
+          }
+          );
+        }
+
+
+
+
+
 
   @override
   void dispose(){
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+    usernameController.dispose();
     super.dispose();
 
   }
@@ -153,8 +160,11 @@ class _SignupPageState extends State< SignupPage> {
 
 
                             TextFormField(
+
+                              controller: usernameController,
                               decoration: InputDecoration(
                                 filled: true,
+
                                 fillColor: Colors.white,
                                 hintText: 'Username',
                                 border: OutlineInputBorder(
@@ -184,6 +194,7 @@ class _SignupPageState extends State< SignupPage> {
 
                             TextFormField(
                               obscureText: true,
+                              controller: passwordController,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
@@ -201,6 +212,7 @@ class _SignupPageState extends State< SignupPage> {
 
                             TextFormField(
                               obscureText: true,
+                              controller: confirmPasswordController,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
@@ -219,22 +231,58 @@ class _SignupPageState extends State< SignupPage> {
                               width: double.infinity,
                               height: 50,
                               child: ElevatedButton(
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage()),
 
-                                    );
+                                onPressed: () async {
+
+                                  if (_formKey.currentState!.validate()) {
+
+                                    final navigator = Navigator.of(context);
+                                    final messenger = ScaffoldMessenger.of(context);
+
+                                    try {
+
+                                      await signupUser(
+                                        usernameController.text.trim(),
+                                        emailController.text.trim(),
+                                        passwordController.text.trim(),
+                                      );
+
+
+
+                                      if (!mounted) return;
+
+                                      navigator.pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) => HomePage()),
+                                      );
+
+                                    } on FirebaseAuthException catch (e) {
+
+                                      String message = "Signup failed";
+
+                                      if (e.code == 'email-already-in-use') {
+                                        message = "Email already in use";
+                                      } else if (e.code == 'weak-password') {
+                                        message = "Password is too weak";
+                                      }
+
+                                      messenger.showSnackBar(
+                                        SnackBar(
+                                          content: Text(message),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
                                   }
                                 },
+
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.indigo,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
+
                                 child: const Text(
                                   'Sign Up',
                                   style: TextStyle(

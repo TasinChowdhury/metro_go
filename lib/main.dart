@@ -29,19 +29,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'splash_screen',
+     initialRoute: 'splash_screen',
+     // initialRoute: 'edit',
 
       routes: {
-        'splash_screen': (context) => SplashScreen(),
+       'splash_screen': (context) => SplashScreen(),
 
         'signin_screen': (context) => SigninScreen(),
         'SignUp': (context) => SignupPage(),
-        'travel': (context) => TravelSchedule(),
-        'fare_calculator': (context) => Fare_calculator(),
+       'travel': (context) => TravelSchedule(),
+       'fare_calculator': (context) => Fare_calculator(),
         'edit': (context) => EditProfilePage(),
-        'home_page': (context) => HomePage(),
+       'home_page': (context) => HomePage(),
         'home_screen': (context) => Homescreen(),
-        'book_ticket_page': (context) => BookTicketPage(),
+      'book_ticket_page': (context) => BookTicketPage(),
       },
     );
   }

@@ -17,7 +17,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   String? validateName(String? value) {
     if (value == null || value.isEmpty) {
@@ -37,14 +36,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return null;
   }
 
-  String? validatePassword(String? password) {
-    if (password == null || password.isEmpty) {
-      return "Enter password";
-    } else if (password.length < 6) {
-      return "Password must be 6 characters";
-    }
-    return null;
-  }
+
 
   String? validateLocation(String? value) {
     if (value == null || value.isEmpty) {
@@ -53,26 +45,48 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return null;
   }
   bool obscurePassword = true;
-  Future edit() async{
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email:emailController.text.trim(),
-        password: passwordController.text.trim(),
 
-    );
-    addDetails(
-        nameController.text.trim(),
-        locationController.text.trim(),
-        emailController.text.trim(),
-        passwordController.text.trim()
-    );
+  @override
+  void initState() {
+    super.initState();
+    loadUserData();
   }
-  Future addDetails(String email,String passward,String name,String location) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'email':email,
-      'password': passward,
-      'name':name,
-      'location':location
+
+  Future loadUserData() async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    DocumentSnapshot doc =
+    await FirebaseFirestore.instance.collection('users').doc(uid).get();
+
+    nameController.text = doc['username'] ?? '';
+    emailController.text = doc['email'] ?? '';
+    locationController.text = doc['location'] ?? '';
+
+  }
+
+  Future updateUserProfile() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    final uid = user.uid;
+
+
+    await user.updateEmail(emailController.text.trim());
+    await user.updateDisplayName(nameController.text.trim());
+
+
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({
+      'username': nameController.text.trim(),
+      'email': emailController.text.trim(),
+      'location': locationController.text.trim(),
     });
+  }
+
+
+  @override
+  void dispose(){
+    emailController.dispose();
+    locationController.dispose();
+    nameController.dispose();
+    super.dispose();
+
   }
   @override
   Widget build(BuildContext context) {
@@ -185,49 +199,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                   ),
 
-                  const SizedBox(height: 25),
 
-                  const Text("Password",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      )),
-                  const SizedBox(height: 25),
-
-
-                  Text("Password",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      )),
-                  TextFormField(
-                    controller: passwordController,
-                    obscureText: obscurePassword,
-                    validator: validatePassword,
-                    decoration: InputDecoration(
-                      hintText: "********",
-                      enabledBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.indigo, width: 2),
-                      ),
-                      focusedBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.indigo),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          obscurePassword
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            obscurePassword = !obscurePassword;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
 
                   const SizedBox(height: 25),
 
@@ -264,10 +236,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>  ProfilePage()),
-                          );
+                          Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.indigo,
@@ -285,22 +254,54 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate())
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) =>  ProfilePage()),
-                            );
-                          },
+                        onPressed: () async {
 
+                          if (_formKey.currentState!.validate()) {
+
+                            final navigator = Navigator.of(context);
+                            final messenger = ScaffoldMessenger.of(context);
+
+                            try {
+
+
+                              await updateUserProfile();
+
+                              if (!mounted) return;
+
+                              navigator.pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => ProfilePage(),
+                                ),
+                              );
+
+                            } on FirebaseAuthException catch (e) {
+
+                              String message = "Edit failed";
+
+                              if (e.code == 'email-already-in-use') {
+                                message = "Email already in use";
+                              } else if (e.code == 'weak-password') {
+                                message = "Password is too weak";
+                              }
+
+                              messenger.showSnackBar(
+                                SnackBar(
+                                  content: Text(message),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
+                          }
+                        },
 
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:  Colors.indigo,
+                          backgroundColor: Colors.indigo,
                           minimumSize: const Size(140, 45),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
+
                         child: const Text(
                           "SAVE",
                           style: TextStyle(
@@ -308,7 +309,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             color: Colors.white,
                           ),
                         ),
-                      ),
+                      )
                     ],
                   )
                 ],
