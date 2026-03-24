@@ -1,14 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'Edit profile.dart';
 import 'home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
-
 class ProfilePage extends StatelessWidget {
-   ProfilePage({super.key});
-  final user =FirebaseAuth.instance.currentUser!;
+  ProfilePage({super.key});
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -17,34 +16,30 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         elevation: 0,
-        title: const Text(
-          "ACCOUNT",
-          style: TextStyle(color: Colors.white),),
+        title: Text("ACCOUNT", style: TextStyle(color: Colors.white)),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white,),
+          icon: Icon(Icons.arrow_back_ios_new, color: Colors.white),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) =>HomePage()),
+              MaterialPageRoute(builder: (context) => HomePage()),
             );
           },
         ),
       ),
       body: Column(
         children: [
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
 
-
-          const CircleAvatar(
+          CircleAvatar(
             radius: 55,
             foregroundImage: AssetImage('assets/profile2.png'),
           ),
 
-          const SizedBox(height: 16),
-
+          SizedBox(height: 16),
 
           Text(
-            'Kaniz Fatema',
+            user.displayName!,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -52,31 +47,27 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
 
-
-           Text(user.email!
-            ,
+          Text(
+            user.email!,
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey,
-              fontWeight: FontWeight.bold
+              fontWeight: FontWeight.bold,
             ),
           ),
 
-          const SizedBox(height: 20),
-
+          SizedBox(height: 20),
 
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 40),
+            margin: EdgeInsets.symmetric(horizontal: 40),
             width: double.infinity,
             height: 50,
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => EditProfilePage(),
-                  ),
+                  MaterialPageRoute(builder: (context) => EditProfilePage()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -86,7 +77,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 elevation: 0,
               ),
-              child: const Text(
+              child: Text(
                 'Edit Profile',
                 style: TextStyle(
                   color: Colors.black,
@@ -97,58 +88,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 30),
-
-
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: Colors.grey.shade200),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.shade200,
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: const Icon(Icons.info_outline,
-                        color: Color(0xFF3F51B5), size: 20),
-                  ),
-                  const SizedBox(width: 14),
-                  const Expanded(
-                    child: Text(
-                      'Information',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
-                  const Icon(Icons.arrow_forward_ios,
-                      size: 16, color: Colors.grey),
-                ],
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 12),
-
+          SizedBox(height: 30),
 
           GestureDetector(
             onTap: () async {
@@ -157,8 +97,8 @@ class ProfilePage extends StatelessWidget {
               navigator.pushReplacementNamed('signin_screen');
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(14),
@@ -176,17 +116,86 @@ class ProfilePage extends StatelessWidget {
                         BoxShadow(
                           color: Colors.grey.shade200,
                           blurRadius: 4,
-                          offset: const Offset(0, 2),
+                          offset: Offset(0, 2),
                         ),
                       ],
                     ),
-                    child: const Icon(Icons.logout,
-                        color: Colors.red, size: 20),
+                    child: Icon(Icons.logout, color: Colors.red, size: 20),
                   ),
-                  const SizedBox(width: 14),
-                  const Expanded(
+                  SizedBox(width: 14),
+                  Expanded(
                     child: Text(
-                      'Logout',
+                      'Log out',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          GestureDetector(
+            onTap: () async {
+              try {
+                final user = FirebaseAuth.instance.currentUser!;
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(user.uid)
+                    .delete();
+                await user.delete();
+                if (!context.mounted) return;
+                Navigator.of(context).pushReplacementNamed('signin_screen');
+              } on FirebaseAuthException catch (e) {
+                if (e.code == 'requires-recent-login') {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Please sign out and sign in again to delete account.',
+                      ),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              }
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: Colors.grey.shade200),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade200,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Icon(
+                      Icons.delete_outline,
+                      color: Colors.red,
+                      size: 20,
+                    ),
+                  ),
+                  SizedBox(width: 14),
+                  Expanded(
+                    child: Text(
+                      'Delete account',
                       style: TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.w500,

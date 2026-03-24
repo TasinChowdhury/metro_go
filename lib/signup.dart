@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'signin_screen.dart';
 import 'package:metrogo/home_page.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+//import 'package:firebase_core/firebase_core.dart';
+//import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 
@@ -66,7 +66,7 @@ class _SignupPageState extends State< SignupPage> {
             email: email,
             password: password,
           );
-
+          await userCredential.user!.updateDisplayName(username);
           final uid = userCredential.user!.uid;
 
           await FirebaseFirestore.instance.collection('users').doc(uid).set({

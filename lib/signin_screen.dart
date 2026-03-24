@@ -176,24 +176,6 @@ class _SigninScreenState extends State<SigninScreen> {
                       ),
                       SizedBox(height: 50),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'Forgot Password?',
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontSize: 20,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-
-                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
