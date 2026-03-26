@@ -3,8 +3,9 @@ import 'package:metrogo/home_screen.dart';
 import 'package:metrogo/map.dart';
 import 'package:metrogo/profile_page.dart';
 
+import 'qr_page.dart';
 import 'ticket_history.dart';
-import 'card.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     Homescreen(),
     MapPage(),
     TicketHistory(),
-    CardHomePage(),
+    QrPage(),
     ProfilePage(),
   ];
 
@@ -54,7 +55,7 @@ class _HomePageState extends State<HomePage> {
           icon: Icon(Icons.confirmation_number),
           label: "Tickets",
         ),
-        BottomNavigationBarItem(icon: Icon(Icons.credit_card), label: "Card"),
+        BottomNavigationBarItem(icon: Icon(Icons.credit_card), label: "Ticket QR"),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
       ],
     );
