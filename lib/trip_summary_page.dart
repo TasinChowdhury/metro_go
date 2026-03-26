@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'trip_data.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+
 class TripSummaryPage extends StatelessWidget {
   const TripSummaryPage({super.key});
 
@@ -189,22 +191,27 @@ class TripSummaryPage extends StatelessWidget {
 
             Container(
               width: double.infinity,
-              height: 180,
+              padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 8),
                   Text(
-                    'QR Code',
+                    'Your Ticket QR',
                     style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.w600,
+                      color: Colors.grey.shade700,
                     ),
+                  ),
+                  SizedBox(height: 12),
+                  QrImageView(
+                    data: TripData.ticketId,
+                    version: QrVersions.auto,
+                    size: 250.0,
+                    errorCorrectionLevel: QrErrorCorrectLevel.H,
                   ),
                 ],
               ),

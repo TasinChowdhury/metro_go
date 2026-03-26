@@ -49,7 +49,7 @@ class _TicketHistoryState extends State<TicketHistory> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16)),
           child: ListTile(
-            leading: const Icon(Icons.train, color: Colors.indigo),
+           // leading: const Icon(Icons.train, color: Colors.indigo),
             title: const Text("Uttara North → Motijheel"),
             subtitle: const Text("Yesterday • 10:30 am"),
             trailing: const Text("৳360"),

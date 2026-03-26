@@ -60,22 +60,22 @@ class _SignupPageState extends State< SignupPage> {
   final TextEditingController confirmPasswordController = TextEditingController();
   final TextEditingController  usernameController = TextEditingController();
 
-        Future signupUser(String username, String email, String password) async {
-          final userCredential = await FirebaseAuth.instance
-              .createUserWithEmailAndPassword(
-            email: email,
-            password: password,
-          );
-          await userCredential.user!.updateDisplayName(username);
-          final uid = userCredential.user!.uid;
+  Future signupUser(String username, String email, String password) async {
+    final userCredential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    await userCredential.user!.updateDisplayName(username);
+    final uid = userCredential.user!.uid;
 
-          await FirebaseFirestore.instance.collection('users').doc(uid).set({
-            'username': username,
-            'email': email,
-            'location': '',
-          }
-          );
-        }
+    await FirebaseFirestore.instance.collection('users').doc(uid).set({
+      'username': username,
+      'email': email,
+      'location': '',
+    }
+    );
+  }
 
 
 

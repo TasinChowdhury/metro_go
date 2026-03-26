@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metrogo/trip_data.dart';
 import 'trip_summary_page.dart';
 
 class PaymentCompletePage extends StatefulWidget {
@@ -12,6 +13,7 @@ class _PaymentCompletePageState extends State<PaymentCompletePage> {
   @override
   void initState() {
     super.initState();
+    TripData.generateTicketId();
     Future.delayed(Duration(seconds: 2), () {
       if (!mounted) return;
       Navigator.pushReplacement(

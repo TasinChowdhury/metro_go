@@ -95,40 +95,40 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
 
 
-        appBar: AppBar(
-          backgroundColor: Colors.indigo,
-          title:Text(
-            "Edit Profile",
+      appBar: AppBar(
+        backgroundColor: Colors.indigo,
+        title:Text(
+          "Edit Profile",
 
-            style:TextStyle(
-              color:Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
+          style:TextStyle(
+            color:Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
-          elevation: 0,
+        ),
+        elevation: 0,
 
 
 
 
 
 //
-          leading: IconButton(
-            onPressed: () {
+        leading: IconButton(
+          onPressed: () {
 
-             Navigator.push(
-               context,
-                MaterialPageRoute(builder: (context) => ProfilePage ()),
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage ()),
 
-              );
-            },
-            icon: Icon(Icons.arrow_back_ios,
-              size: 20,
-              color: Colors.white,),
+            );
+          },
+          icon: Icon(Icons.arrow_back_ios,
+            size: 20,
+            color: Colors.white,),
 
 
-          ),
         ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -152,168 +152,168 @@ class _EditProfilePageState extends State<EditProfilePage> {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Form(
                 key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
 
 
-                  const Text("Full Name",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      )),
-                  TextFormField(
-                    controller: nameController,
-                    validator: validateName,
-                    decoration: const InputDecoration(
-                      hintText: "Kaniz Fatima",
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.indigo, width: 1.5),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.indigo),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 25),
-
-
-                  Text("Email",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      )),
-                  TextFormField(
-                    controller: emailController,
-                    validator: validateEmail,
-                    decoration: const InputDecoration(
-                      hintText: "kanizfatima2@gmail.com",
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.indigo, width: 1.5),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.indigo),
-                      ),
-                    ),
-                  ),
-
-
-
-                  const SizedBox(height: 25),
-
-
-
-                  Text("Location",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      )),
-                  TextFormField(
-                    controller: locationController,
-                    validator: validateLocation,
-                    decoration: const InputDecoration(
-                      hintText: "Bangladesh",
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.indigo, width: 1.5),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.indigo),
-                      ),
-                    ),
-                  ),
-
-
-                  const SizedBox(height: 50),
-
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-
-
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.indigo,
-                          minimumSize: const Size(140, 45),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
+                    const Text("Full Name",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        )),
+                    TextFormField(
+                      controller: nameController,
+                      validator: validateName,
+                      decoration: const InputDecoration(
+                        hintText: "Kaniz Fatima",
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.indigo, width: 1.5),
                         ),
-                        child: const Text(
-                          "CANCEL",
-                          style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.white,
-                          ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.indigo),
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () async {
-
-                          if (_formKey.currentState!.validate()) {
-
-                            final navigator = Navigator.of(context);
-                            final messenger = ScaffoldMessenger.of(context);
-
-                            try {
+                    ),
+                    const SizedBox(height: 25),
 
 
-                              await updateUserProfile();
+                    Text("Email",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        )),
+                    TextFormField(
+                      controller: emailController,
+                      validator: validateEmail,
+                      decoration: const InputDecoration(
+                        hintText: "kanizfatima2@gmail.com",
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.indigo, width: 1.5),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.indigo),
+                        ),
+                      ),
+                    ),
 
-                              if (!mounted) return;
 
-                              navigator.pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => ProfilePage(),
-                                ),
-                              );
 
-                            } on FirebaseAuthException catch (e) {
+                    const SizedBox(height: 25),
 
-                              String message = "Edit failed";
 
-                              if (e.code == 'email-already-in-use') {
-                                message = "Email already in use";
-                              } else if (e.code == 'weak-password') {
-                                message = "Password is too weak";
+
+                    Text("Location",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        )),
+                    TextFormField(
+                      controller: locationController,
+                      validator: validateLocation,
+                      decoration: const InputDecoration(
+                        hintText: "Bangladesh",
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.indigo, width: 1.5),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.indigo),
+                        ),
+                      ),
+                    ),
+
+
+                    const SizedBox(height: 50),
+
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+
+
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.indigo,
+                            minimumSize: const Size(140, 45),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                          ),
+                          child: const Text(
+                            "CANCEL",
+                            style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
+
+                            if (_formKey.currentState!.validate()) {
+
+                              final navigator = Navigator.of(context);
+                              final messenger = ScaffoldMessenger.of(context);
+
+                              try {
+
+
+                                await updateUserProfile();
+
+                                if (!mounted) return;
+
+                                navigator.pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => ProfilePage(),
+                                  ),
+                                );
+
+                              } on FirebaseAuthException catch (e) {
+
+                                String message = "Edit failed";
+
+                                if (e.code == 'email-already-in-use') {
+                                  message = "Email already in use";
+                                } else if (e.code == 'weak-password') {
+                                  message = "Password is too weak";
+                                }
+
+                                messenger.showSnackBar(
+                                  SnackBar(
+                                    content: Text(message),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
                               }
-
-                              messenger.showSnackBar(
-                                SnackBar(
-                                  content: Text(message),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
                             }
-                          }
-                        },
+                          },
 
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.indigo,
-                          minimumSize: const Size(140, 45),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.indigo,
+                            minimumSize: const Size(140, 45),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
                           ),
-                        ),
 
-                        child: const Text(
-                          "SAVE",
-                          style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.white,
+                          child: const Text(
+                            "SAVE",
+                            style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             )
           ],
@@ -322,3 +322,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 }
+
+extension on User {
+  Future<void> updateEmail(String trim) async {}
+}
+
+
