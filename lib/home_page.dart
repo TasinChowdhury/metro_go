@@ -50,10 +50,10 @@ class _HomePageState extends State<HomePage> {
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.alt_route), label: "Routes"),
-        // BottomNavigationBarItem(
-        //   icon: Icon(Icons.confirmation_number),
-        //   label: "Tickets",
-        // ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.confirmation_number),
+          label: "Tickets",
+        ),
         BottomNavigationBarItem(icon: Icon(Icons.credit_card), label: "Card"),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
       ],
