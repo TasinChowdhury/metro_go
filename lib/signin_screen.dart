@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:metrogo/SignUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'trip_data.dart';
 
 
 class SigninScreen extends StatefulWidget {
@@ -15,6 +18,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
 
 
 
@@ -146,6 +150,11 @@ class _SigninScreenState extends State<SigninScreen> {
                                   email: emailController.text.trim(),
                                   password: passwordController.text.trim(),
                                 );
+                                final doc = await FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .get();
+                                TripData.ticketId = doc.data()?['ticketId'] ?? '';
                                 if (!mounted) return;
                                 navigator.pushReplacementNamed('home_page');
                               } on FirebaseAuthException {

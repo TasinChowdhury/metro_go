@@ -1,5 +1,4 @@
 import 'package:uuid/uuid.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -18,12 +17,9 @@ class TripData {
   }
   static Future<void> saveTicket() async {
     await FirebaseFirestore.instance
-        .collection('ticketid')
-        .doc(ticketId)
-        .set({
-      'ticketId': ticketId,
-
-    });
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({'ticketId': ticketId}, SetOptions(merge: true));
   }
   static String paymentMethod() {
     if (paymentIndex == -1) return '';

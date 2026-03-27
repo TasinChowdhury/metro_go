@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'Edit profile.dart';
 import 'home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
