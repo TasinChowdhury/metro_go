@@ -13,7 +13,9 @@ class _PaymentCompletePageState extends State<PaymentCompletePage> {
   @override
   void initState() {
     super.initState();
+
     TripData.generateTicketId();
+    TripData.saveTicket();
     Future.delayed(Duration(seconds: 2), () {
       if (!mounted) return;
       Navigator.pushReplacement(

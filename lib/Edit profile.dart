@@ -17,7 +17,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController locationController = TextEditingController();
+ // final TextEditingController locationController = TextEditingController();
   String? validateName(String? value) {
     if (value == null || value.isEmpty) {
       return "Enter your name";
@@ -59,7 +59,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     nameController.text = doc['username'] ?? '';
     emailController.text = doc['email'] ?? '';
-    locationController.text = doc['location'] ?? '';
+   // locationController.text = doc['location'] ?? '';
 
   }
 
@@ -75,7 +75,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     await FirebaseFirestore.instance.collection('users').doc(uid).update({
       'username': nameController.text.trim(),
       'email': emailController.text.trim(),
-      'location': locationController.text.trim(),
+     // 'location': locationController.text.trim(),
     });
   }
 
@@ -83,7 +83,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   void dispose(){
     emailController.dispose();
-    locationController.dispose();
+    //locationController.dispose();
     nameController.dispose();
     super.dispose();
 
@@ -205,25 +205,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
 
 
-                    Text("Location",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        )),
-                    TextFormField(
-                      controller: locationController,
-                      validator: validateLocation,
-                      decoration: const InputDecoration(
-                        hintText: "Bangladesh",
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.indigo, width: 1.5),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.indigo),
-                        ),
-                      ),
-                    ),
+                   // Text("Location",
+                      //  style: TextStyle(
+                       //   color: Colors.black,
+                       //   fontWeight: FontWeight.bold,
+                        //  fontSize: 18,
+                     //   )),
+                 //   TextFormField(
+                   //   controller: locationController,
+                    //  validator: validateLocation,
+                    //  decoration: const InputDecoration(
+                     //   hintText: "Bangladesh",
+                     //   enabledBorder: UnderlineInputBorder(
+                        //  borderSide: BorderSide(color: Colors.indigo, width: 1.5),
+                     //   ),
+                     //   focusedBorder: UnderlineInputBorder(
+                     //     borderSide: BorderSide(color: Colors.indigo),
+                   //     ),
+                   //   ),
+                   // ),
 
 
                     const SizedBox(height: 50),
