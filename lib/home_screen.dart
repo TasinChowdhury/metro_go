@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'book_ticket_page.dart';
 import 'card.dart';
@@ -42,6 +43,9 @@ class Homescreen extends StatelessWidget {
   }
 
   Widget _header() {
+    final user = FirebaseAuth.instance.currentUser;
+    final displayName = user?.displayName ?? 'Traveller';
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -55,116 +59,112 @@ class Homescreen extends StatelessWidget {
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   "Hey,",
                   style: TextStyle(fontSize: 14, color: Colors.grey),
                 ),
                 Text(
-                  "Kaniz Fatema",
+                  displayName,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ],
         ),
-        // IconButton(
-        //   onPressed: () {},
-        //   icon: const Icon(Icons.notifications_none),
-        // ),
       ],
     );
   }
 
-  Widget _currentStationCard() {
-    return Card(
-      color: Color(0xffd7deff),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: const [
-                Icon(Icons.location_on, color: Colors.indigo),
-                SizedBox(width: 8),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Current Station",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    Text(
-                      "Uttara North",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            // TextButton(
-            //   onPressed: () {
-            //     Navigator.push(context, route)
-            //   },
-            //   child: const Text("Change"),
-            // ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _currentStationCard() {
+  //   return Card(
+  //     color: Color(0xffd7deff),
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(16),
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           Row(
+  //             children: const [
+  //               Icon(Icons.location_on, color: Colors.indigo),
+  //               SizedBox(width: 8),
+  //               Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Text(
+  //                     "Current Station",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   ),
+  //                   Text(
+  //                     "Uttara North",
+  //                     style: TextStyle(
+  //                       fontSize: 16,
+  //                       fontWeight: FontWeight.bold,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //           // TextButton(
+  //           //   onPressed: () {
+  //           //     Navigator.push(context, route)
+  //           //   },
+  //           //   child: const Text("Change"),
+  //           // ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  Widget _nextTrainsCard() {
-    return Card(
-      color: Color(0xffd7deff),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+  // Widget _nextTrainsCard() {
+  //   return Card(
+  //     color: Color(0xffd7deff),
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+  //
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(16),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           const Text(
+  //             "Next Trains",
+  //             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+  //           ),
+  //           const SizedBox(height: 12),
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: const [
+  //               Text("Uttara North → Motijheel"),
+  //               Text("09:55 am", style: TextStyle(fontWeight: FontWeight.bold)),
+  //             ],
+  //           ),
+  //           const SizedBox(height: 12),
+  //           Row(
+  //             children: [
+  //               _timeChip("10:05 am"),
+  //               const SizedBox(width: 8),
+  //               _timeChip("10:15 am"),
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Next Trains",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text("Uttara North → Motijheel"),
-                Text("09:55 am", style: TextStyle(fontWeight: FontWeight.bold)),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                _timeChip("10:05 am"),
-                const SizedBox(width: 8),
-                _timeChip("10:15 am"),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _timeChip(String time) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.indigo,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(time, style: const TextStyle(color: Colors.white)),
-    );
-  }
+  // Widget _timeChip(String time) {
+  //   return Container(
+  //     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+  //     decoration: BoxDecoration(
+  //       color: Colors.indigo,
+  //       borderRadius: BorderRadius.circular(20),
+  //     ),
+  //     child: Text(time, style: const TextStyle(color: Colors.white)),
+  //   );
+  // }
 
   Widget _featuresGrid(BuildContext context) {
     return GridView.count(

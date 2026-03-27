@@ -68,11 +68,14 @@ class _SignupPageState extends State< SignupPage> {
     );
     await userCredential.user!.updateDisplayName(username);
     final uid = userCredential.user!.uid;
+    final cardNumber = '6010${uid.replaceAll('-', '').substring(0, 12)}';
 
     await FirebaseFirestore.instance.collection('users').doc(uid).set({
       'username': username,
       'email': email,
       'location': '',
+      'balance' : 0,
+      'cardNumber': cardNumber,
     }
     );
   }
