@@ -6,6 +6,7 @@ class TripData {
   static int passengerCount = 0;
   static int paymentIndex = -1;
   static int price = 0;
+  static int card_recharge = 0;
   static const List<String> paymentMethods = ['BKash', 'Rocket', 'Nagad'];
   static String ticketId = '';
 

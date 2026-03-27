@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metrogo/recharge_input.dart';
 import 'card.dart';
+import 'trip_data.dart';
 
 class RechargePage extends StatefulWidget {
   const RechargePage({super.key});
@@ -11,6 +12,31 @@ class RechargePage extends StatefulWidget {
 
 class _RechargePageState extends State<RechargePage> {
   int selectedIndex = -1;
+  String? _amountError;
+  final TextEditingController _amountController = TextEditingController();
+
+  //final _formKey = GlobalKey<FormState>();
+  String? validateRechargeAmount(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter amount';
+    }
+    if (int.tryParse(value) == null) {
+      return 'Please enter a valid number';
+    }
+    if (int.parse(value) <= 100) {
+      return 'Amount must be greater than 100';
+    }
+    if (int.parse(value) >= 5000) {
+      return 'Amount must be less than 5000';
+    }
+    return null;
+  }
+
+  @override
+  void dispose() {
+    _amountController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +46,7 @@ class _RechargePageState extends State<RechargePage> {
         backgroundColor: Colors.indigo,
         elevation: 0,
         title: Text(
-          "Recharge Card",
+          "CARD RECHARGE",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -54,7 +80,7 @@ class _RechargePageState extends State<RechargePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Amount to Pay',
+                    'Recharge Amount',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -62,6 +88,29 @@ class _RechargePageState extends State<RechargePage> {
                     ),
                   ),
                   SizedBox(height: 10),
+                  TextField(
+                    controller: _amountController,
+                    keyboardType: TextInputType.number,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: '৳ Enter amount',
+                      hintStyle: const TextStyle(color: Colors.white54),
+                      border: InputBorder.none,
+                      // no box border, blends with container
+                      errorText: _amountError,
+                    ),
+                    onChanged: (value) {
+                      // Save to TripData so recharge_input can access it
+                      setState(() {
+                        _amountError = null; // clear error while typing
+                        TripData.card_recharge = int.tryParse(value) ?? 0;
+                      });
+                    },
+                  ),
                 ],
               ),
             ),
@@ -191,23 +240,46 @@ class _RechargePageState extends State<RechargePage> {
               height: 52,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.indigo,
+                  backgroundColor: Colors.indigoAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
                 ),
                 onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                  // Validate before opening bottom sheet
+                  final error = validateRechargeAmount(_amountController.text);
+                  if (error != null) {
+                    setState(() => _amountError = error);
+                    return;
+                  }
+                  if (selectedIndex == -1) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Center(
+                          child: Text('Please select a payment method first!',
+                              style: TextStyle(color: Colors.black,
+                                  fontWeight: FontWeight.w600)
+                          ),
+                        ),
+
+                        backgroundColor: Colors.redAccent,
+                        duration: Duration(seconds: 2),
                       ),
-                    ),
-                    builder: (context) => RechargeInput(),
-                  );
+                    );
+                  } else {
+                    TripData.paymentIndex = selectedIndex;
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                      ),
+                      builder: (context) => RechargeInput(),
+                    );
+                  }
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -232,3 +304,5 @@ class _RechargePageState extends State<RechargePage> {
     );
   }
 }
+
+
