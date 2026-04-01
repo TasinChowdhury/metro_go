@@ -99,15 +99,15 @@ class _RechargeInputState extends State<RechargeInput> {
               const SizedBox(height: 16),
 
               // Shows the amount being recharged so user can confirm
-              Text(
-                'Paying ৳${TripData.card_recharge} via ${TripData.paymentMethod()}',
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Colors.indigo,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 20),
+              // Text(
+              //   'Paying ৳${TripData.card_recharge} via ${TripData.paymentMethod()}',
+              //   style: const TextStyle(
+              //     fontSize: 15,
+              //     color: Colors.indigo,
+              //     fontWeight: FontWeight.w600,
+              //   ),
+              // ),
+              //const SizedBox(height: 20),
               //SizedBox(height: 30),
               TextFormField(
                 keyboardType: TextInputType.number,
@@ -147,14 +147,10 @@ class _RechargeInputState extends State<RechargeInput> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: _isLoading
-                      ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text(
+                  child:
+                  const Text(
                     'Done',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

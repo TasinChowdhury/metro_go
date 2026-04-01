@@ -11,11 +11,32 @@ class PaymentCompletePage extends StatefulWidget {
 
 class _PaymentCompletePageState extends State<PaymentCompletePage> {
   @override
+  // void initState() {
+  //   super.initState();
+  //
+  //   TripData.generateTicketId();
+  //   TripData.saveTicket();
+  //   Future.delayed(Duration(seconds: 2), () {
+  //     if (!mounted) return;
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => TripSummaryPage()),
+  //     );
+  //   });
+  // }
+
   void initState() {
     super.initState();
+    _saveAndNavigate(); // call our new async function
+  }
 
-    TripData.generateTicketId();
-    TripData.saveTicket();
+  Future<void> _saveAndNavigate() async {
+    TripData.generateTicketId(); // generate UUID first
+
+    await TripData.saveTicket(); // WAIT until Firestore save is done
+
+    // Only navigate after save is confirmed
+    if (!mounted) return;
     Future.delayed(Duration(seconds: 2), () {
       if (!mounted) return;
       Navigator.pushReplacement(

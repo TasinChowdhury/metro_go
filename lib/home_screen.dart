@@ -22,19 +22,20 @@ class Homescreen extends StatelessWidget {
       ),
       child: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 10),
               _header(),
              // const SizedBox(height: 18),
              // _currentStationCard(),
              // const SizedBox(height: 16),
              // _nextTrainsCard(),
-              const SizedBox(height: 30),
-              _featuresGrid(context),
               const SizedBox(height: 40),
-              _recentJourney(),
+              _featuresGrid(context),
+              const SizedBox(height: 100),
+              //_recentJourney(),
             ],
           ),
         ),
@@ -53,7 +54,7 @@ class Homescreen extends StatelessWidget {
           children: [
             const CircleAvatar(
               backgroundColor: Color(0xfff4fbff),
-              radius: 24,
+              radius: 25,
               backgroundImage: AssetImage('assets/profile.png'),
             ),
             const SizedBox(width: 12),
@@ -235,28 +236,28 @@ class Homescreen extends StatelessWidget {
     );
   }
 
-  Widget _recentJourney() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          "Recent Journey",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 15),
-        Card(
-          color: Color(0xffd7deff),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: ListTile(
-            leading: const Icon(Icons.train, color: Colors.indigo),
-            title: const Text("Uttara North → Motijheel"),
-            subtitle: const Text("Yesterday • 10:30 am"),
-            trailing: const Text("৳360"),
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _recentJourney() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       const Text(
+  //         "Recent Journey",
+  //         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+  //       ),
+  //       const SizedBox(height: 15),
+  //       Card(
+  //         color: Color(0xffd7deff),
+  //         shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(16),
+  //         ),
+  //         child: ListTile(
+  //           leading: const Icon(Icons.train, color: Colors.indigo),
+  //           title: const Text("Uttara North → Motijheel"),
+  //           subtitle: const Text("Yesterday • 10:30 am"),
+  //           trailing: const Text("৳360"),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 }
