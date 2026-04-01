@@ -32,6 +32,10 @@ class TripData {
       'purchasedAt': FieldValue.serverTimestamp(),
       'expiresAt': Timestamp.fromDate(DateTime.now().add(Duration(hours: 24))),
     });
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .set({'ticketId': ticketId}, SetOptions(merge: true));
   }
 
   static String paymentMethod() {

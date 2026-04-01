@@ -69,89 +69,89 @@ class TripSummaryPage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Route:',
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Route:',
+                        style: TextStyle(
+                          color: Colors.grey.shade700,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        '${TripData.selectedFrom}->${TripData.selectedTo}',
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    '${TripData.selectedFrom}->${TripData.selectedTo}',
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-              ],
-            ),
                   SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Passengers:',
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Passengers:',
+                        style: TextStyle(
+                          color: Colors.grey.shade700,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        '${TripData.passengerCount} Passengers',
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    '${TripData.passengerCount} Passengers',
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  ],
-              ),
                   SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Payment Methode:',
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Payment Methode:',
+                        style: TextStyle(
+                          color: Colors.grey.shade700,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        TripData.paymentMethod(),
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    TripData.paymentMethod(),
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  ],
-              ),
                   SizedBox(height: 4),
 
                   Divider(color: Colors.grey.shade600),
                   SizedBox(height: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Total Price',
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Total Price',
+                        style: TextStyle(
+                          color: Colors.grey.shade700,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: 0),
+                    ],
                   ),
-                  SizedBox(height:0,),
-              ],
-            ),
 
                   Row(
                     children: [
@@ -174,18 +174,16 @@ class TripSummaryPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 2),
-                          Text(
-                            '${TripData.price}',
-                            style: TextStyle(
-                              fontSize: 39,
-                              color: Colors.grey.shade700,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        '${TripData.price}',
+                        style: TextStyle(
+                          fontSize: 39,
+                          color: Colors.grey.shade700,
+                        ),
                       ),
                     ],
-
-
+                  ),
+                ],
               ),
             ),
 
