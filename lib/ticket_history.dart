@@ -14,28 +14,12 @@ class TicketHistory extends StatefulWidget {
 class _TicketHistoryState extends State<TicketHistory> {
   final String? _currentUserId = FirebaseAuth.instance.currentUser?.uid;
 
-  // ── 2. BUILD THE FIRESTORE STREAM ────────────────────────────────
-  // This creates a LIVE stream of this user's tickets.
-  // Every time Firestore data changes, this stream emits new data.
   Stream<QuerySnapshot> _getTicketStream() {
     return FirebaseFirestore.instance
         .collection('tickets')
         .where('userId', isEqualTo: _currentUserId)
-        .orderBy('purchasedAt', descending: true) // newest first
-        .snapshots(); // .snapshots() = real-time stream
-  }
-
-  // ── 3. HELPER — FORMAT TIMESTAMP TO READABLE DATE ────────────────
-  String _formatDate(Timestamp? timestamp) {
-    if (timestamp == null) return 'Just now';
-
-    final date = timestamp.toDate(); // Timestamp → DateTime
-    final now = DateTime.now();
-    final diff = now.difference(date);
-
-    if (diff.inDays == 0) return 'Today';
-    if (diff.inDays == 1) return 'Yesterday';
-    return '${date.day}/${date.month}/${date.year}';
+        .orderBy('purchasedAt', descending: true)
+        .snapshots();
   }
 
   @override
@@ -75,14 +59,13 @@ class _TicketHistoryState extends State<TicketHistory> {
       body:
       _currentUserId == null
 
-      // If no user is logged in, show message
+      // If no user is logged in
           ? const Center(child: Text("Please log in to view tickets"))
 
           : StreamBuilder<QuerySnapshot>(
         stream: _getTicketStream(),
         builder: (context, snapshot) {
 
-          // ── STATE 1: Loading ────────────────────────────────
           // Stream hasn't emitted first value yet
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -90,14 +73,12 @@ class _TicketHistoryState extends State<TicketHistory> {
             );
           }
 
-          // ── STATE 2: Error ──────────────────────────────────
           if (snapshot.hasError) {
             return Center(
               child: Text("Something went wrong: ${snapshot.error}"),
             );
           }
 
-          // ── STATE 3: Empty ──────────────────────────────────
           // User is logged in but has no tickets yet
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(
@@ -117,8 +98,6 @@ class _TicketHistoryState extends State<TicketHistory> {
             );
           }
 
-          // ── STATE 4: Has Data ───────────────────────────────
-          // snapshot.data!.docs = list of Firestore documents
           final docs = snapshot.data!.docs;
 
           return ListView.builder(
@@ -126,21 +105,15 @@ class _TicketHistoryState extends State<TicketHistory> {
             itemCount: docs.length,
             itemBuilder: (context, index) {
 
-              // Each doc is one ticket from Firestore
               final doc = docs[index];
 
-              // doc.data() returns Map<String, dynamic>
-              // Cast it so Dart knows the type
+
               final data = doc.data() as Map<String, dynamic>;
 
-              // Extract each field safely with ?? fallback
               final String from      = data['from'] ?? 'Unknown';
               final String to        = data['to'] ?? 'Unknown';
               final int price        = data['price'] ?? 0;
               final int passengers   = data['passengers'] ?? 1;
-              final Timestamp? time  = data['purchasedAt'];
-              //final String ticketId  = doc.id; // Firestore doc ID
-             // final String status    = _getStatus(data);
 
               return GestureDetector(
                 child: Container(
@@ -153,8 +126,6 @@ class _TicketHistoryState extends State<TicketHistory> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
-                      // Route + Status badge in same row
                       Row(
                         mainAxisAlignment:
                         MainAxisAlignment.spaceBetween,
@@ -167,7 +138,6 @@ class _TicketHistoryState extends State<TicketHistory> {
                               color: Colors.indigo,
                             ),
                           ),
-                          //_statusBadge(status),
                         ],
                       ),
                       const SizedBox(height: 8),
@@ -178,7 +148,7 @@ class _TicketHistoryState extends State<TicketHistory> {
                         MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${_formatDate(time)} • $passengers passenger(s)',
+                            '$passengers passenger(s)',
                             style: TextStyle(
                               fontSize: 13,
                               color: Colors.grey.shade600,

@@ -22,7 +22,7 @@ class TripData {
     await FirebaseFirestore.instance.collection('tickets').doc(ticketId)
     //.set({'ticketId': ticketId}, SetOptions(merge: true));
     .set({
-      'userId': userId, // ← so each user sees only their tickets
+      'userId': userId,
       'from': selectedFrom,
       'to': selectedTo,
       'passengers': passengerCount,
